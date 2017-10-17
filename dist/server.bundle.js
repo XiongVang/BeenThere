@@ -27,7 +27,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "b1417b80c411b86e4671"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "d33d5714f34c8e5ff7a5"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -820,7 +820,7 @@
 /* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(__dirname) {'use strict';
+	'use strict';
 	
 	var express = __webpack_require__(2);
 	var router = express.Router();
@@ -837,16 +837,16 @@
 	// Also catches any other request not explicitly matched elsewhere
 	router.get('/', function (req, res) {
 	  console.log('request for index');
-	  res.sendFile(path.join(__dirname, '../public/index.html'));
+	  res.sendFile(path.join(__dirname, '/../public/index.html'));
 	});
 	
 	router.get('/*', function (req, res) {
 	  console.log('404 : ', req.params);
-	  res.sendStatus(404);
+	  console.log('__dirname', __dirname);
+	  res.sendFile(path.join(__dirname, '/../public/index.html'));
 	});
 	
 	module.exports = router;
-	/* WEBPACK VAR INJECTION */}.call(exports, "/"))
 
 /***/ }),
 /* 14 */
@@ -896,7 +896,7 @@
 /* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(__dirname) {'use strict';
+	'use strict';
 	
 	var express = __webpack_require__(2);
 	var router = express.Router();
@@ -935,7 +935,6 @@
 	});
 	
 	module.exports = router;
-	/* WEBPACK VAR INJECTION */}.call(exports, "/"))
 
 /***/ }),
 /* 17 */

@@ -36,6 +36,7 @@ app.use('/user', userRouter);
 // Catch all bucket, must be last!
 app.use('/', indexRouter);
 
+
 // Listen //
 app.listen(port, function(){
    console.log('Listening on port:', port);
