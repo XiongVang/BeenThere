@@ -15,7 +15,7 @@ router.post('/',
 // Also catches any other request not explicitly matched elsewhere
 router.get('/', function(req, res) {
   console.log('request for index');
-  res.sendFile(path.join(__dirname, '../public/views/index.html'));
+  res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
 router.get('/*', function(req, res) {

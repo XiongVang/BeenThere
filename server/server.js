@@ -1,26 +1,26 @@
-var express = require('express');
-var app = express();
-var bodyParser = require('body-parser');
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
 
-var passport = require('./strategies/mongo.localstrategy');
-var sessionConfig = require('./modules/session.config');
+const passport = require('./strategies/mongo.localstrategy');
+const sessionConfig = require('./modules/session.config');
 
 //DB Module
-var db = require('./modules/db.config.js');
+const db = require('./modules/db.config.js');
 
 // Route includes
-var indexRouter = require('./routes/index.router');
-var userRouter = require('./routes/user.router');
-var registerRouter = require('./routes/register.router');
+const indexRouter = require('./routes/index.router');
+const userRouter = require('./routes/user.router');
+const registerRouter = require('./routes/register.router');
 
-var port = process.env.PORT || 5000;
+const port = process.env.PORT || 3000;
 
 // Body parser middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 // Serve back static files
-app.use(express.static('./server/public'));
+app.use(express.static('public'));
 
 // Passport Session Configuration
 app.use(sessionConfig);
