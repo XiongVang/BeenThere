@@ -27,7 +27,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "6b513441f0e2ecf26943"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "f50079107f264732de58"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -820,28 +820,15 @@
 /* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 	
-	var express = __webpack_require__(2);
-	var router = express.Router();
-	var passport = __webpack_require__(5);
-	var path = __webpack_require__(14);
+	const express = __webpack_require__(2);
+	const router = express.Router();
+	const passport = __webpack_require__(5);
+	const path = __webpack_require__(14);
 	
-	// Handles login form POST from index.html
-	router.post('/', passport.authenticate('local', { // local strategy - userStrategy.js
-	  // request stays within node/express and is routed as a new request
-	  successRedirect: '/user' // goes to routes/user.js
-	}));
-	
-	// Handle index file separately
-	// Also catches any other request not explicitly matched elsewhere
-	router.get('/', function (req, res) {
-	  console.log('request for index');
-	  res.sendFile(path.join(__dirname, '/../public/index.html'));
-	});
-	
-	router.get('/*', function (req, res) {
-	  res.sendFile(path.join(__dirname, '/../public/index.html'));
+	router.get("*", (req, res) => {
+	  res.sendFile(path.join(__dirname, "/../public/index.html"));
 	});
 	
 	module.exports = router;
@@ -856,36 +843,33 @@
 /* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 	
-	var express = __webpack_require__(2);
-	var router = express.Router();
+	const express = __webpack_require__(2);
+	const router = express.Router();
+	const passport = __webpack_require__(5);
+	const path = __webpack_require__(14);
+	
+	// Checks if user is authenticated before proceeding
+	router.use(passport.authenticate("local"), (req, res, next) => {
+	  next();
+	});
 	
 	// Handles Ajax request for user information if user is authenticated
-	router.get('/', function (req, res) {
-	  console.log('get /user route');
-	  // check if logged in
-	  if (req.isAuthenticated()) {
-	    // send back user object from database
-	    console.log('logged in', req.user);
-	    var userInfo = {
-	      username: req.user.username
-	    };
-	    res.send(userInfo);
-	  } else {
-	    // failure best handled on the server. do redirect here.
-	    console.log('not logged in');
-	    // should probably be res.sendStatus(403) and handled client-side, esp if this is an AJAX request (which is likely with AngularJS)
-	    res.send(false);
-	  }
+	router.get("/", (req, res) => {
+	  res.send(req.user);
 	});
 	
 	// clear all server session information about this user
-	router.get('/logout', function (req, res) {
+	router.get("/logout", (req, res) => {
 	  // Use passport's built-in method to log out the user
-	  console.log('Logged out');
+	  console.log("Logged out");
 	  req.logOut();
 	  res.sendStatus(200);
+	});
+	
+	router.get("*", (req, res) => {
+	  res.sendFile(path.join(__dirname, "/../public/index.html"));
 	});
 	
 	module.exports = router;
@@ -894,44 +878,46 @@
 /* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 	
-	var express = __webpack_require__(2);
-	var router = express.Router();
-	var Users = __webpack_require__(7);
-	var path = __webpack_require__(14);
+	const express = __webpack_require__(2);
+	const router = express.Router();
+	const Users = __webpack_require__(7);
+	const path = __webpack_require__(14);
 	
-	// Handles request for HTML file
-	router.get('/', function (req, res, next) {
-	  console.log('get /register route');
-	  res.sendFile(path.resolve(__dirname, '../public/views/templates/register.html'));
+	router.get("/", (req, res, next) => {
+	  res.send({ message: "Succes!" });
 	});
 	
 	// Handles POST request with new user data
-	router.post('/', function (req, res, next) {
-	  console.log('post /register route');
+	router.post("/", (req, res, next) => {
+	  console.log("post /register route");
 	  /*
 	  username: {type: String, required: true, index: {unique: true}},
 	  password: {type: String, required: true},
 	  recipes: {type: Array}
 	  */
-	  var userToSave = {
+	  const userToSave = {
 	    username: req.body.username,
 	    password: req.body.password
 	  };
 	
-	  console.log('userToSave', userToSave);
+	  console.log("userToSave", userToSave);
 	
-	  Users.create(userToSave, function (err, post) {
-	    console.log('post /register -- User.create');
+	  Users.create(userToSave, (err, post) => {
+	    console.log("post /register -- User.create");
 	    if (err) {
-	      console.log('post /register -- User.create -- failure');
+	      console.log("post /register -- User.create -- failure");
 	      res.sendStatus(500);
 	    } else {
-	      console.log('post /register -- User.create -- success');
+	      console.log("post /register -- User.create -- success");
 	      res.sendStatus(201);
 	    }
 	  });
+	});
+	
+	router.get("*", (req, res) => {
+	  res.sendFile(path.join(__dirname, "/../public/index.html"));
 	});
 	
 	module.exports = router;
