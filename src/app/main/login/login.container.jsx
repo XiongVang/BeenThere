@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { login } from "../actions/login.action.jsx";
+import { login } from "../../../actions/login.action.jsx";
 import { bindActionCreators } from "redux";
 import { Route, Redirect } from "react-router-dom";
 
-import LoginForm from "../components/loginForm.component.jsx";
+import LoginForm from "./loginForm.component.jsx";
 
-class Login extends Component {
+class LoginContainer extends Component {
   constructor(props) {
     super(props);
 
@@ -20,14 +20,18 @@ class Login extends Component {
   render() {
     const { isAuthenticated } = this.props;
     return (
-      <Route
-        render={() =>
-          isAuthenticated ? (
-            <Redirect to="/userpage" />
-          ) : (
-            <LoginForm onSubmit={this.handleSubmit} />
-          )}
-      />
+      <div className="card">
+        <div className="card-body">
+          <Route
+            render={() =>
+              isAuthenticated ? (
+                <Redirect to="/userpage" />
+              ) : (
+                <LoginForm onSubmit={this.handleSubmit} />
+              )}
+          />
+        </div>
+      </div>
     );
   }
 }
@@ -40,4 +44,4 @@ function mapStateToProps(store) {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({ login }, dispatch);
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer);
