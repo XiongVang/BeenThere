@@ -1,9 +1,9 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
-import Header from "./header.component.jsx";
-import Footer from "./footer.component.jsx";
-import Main from "./main.component.jsx";
+import Header from "../containers/headerPartial.container.jsx";
+import Footer from "./footerPartial.component.jsx";
+import Main from "./mainWrapper.component.jsx";
 
 const App = () => {
   return (

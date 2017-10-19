@@ -19,8 +19,6 @@ router.get('/', function(req, res) {
 });
 
 router.get('/*', function(req, res) {
-  console.log('404 : ', req.params);
-  console.log('__dirname', __dirname);
   res.sendFile(path.join(__dirname, '/../public/index.html'));
 });
 

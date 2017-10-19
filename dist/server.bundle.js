@@ -27,7 +27,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "d33d5714f34c8e5ff7a5"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "6b513441f0e2ecf26943"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -841,8 +841,6 @@
 	});
 	
 	router.get('/*', function (req, res) {
-	  console.log('404 : ', req.params);
-	  console.log('__dirname', __dirname);
 	  res.sendFile(path.join(__dirname, '/../public/index.html'));
 	});
 	
@@ -921,6 +919,8 @@
 	    username: req.body.username,
 	    password: req.body.password
 	  };
+	
+	  console.log('userToSave', userToSave);
 	
 	  Users.create(userToSave, function (err, post) {
 	    console.log('post /register -- User.create');

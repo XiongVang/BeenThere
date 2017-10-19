@@ -23,7 +23,8 @@ router.post('/', function(req, res, next) {
       password : req.body.password
     };
 
-
+    console.log('userToSave', userToSave);
+    
     Users.create(userToSave, function(err, post) {
       console.log('post /register -- User.create');
          if(err) {
