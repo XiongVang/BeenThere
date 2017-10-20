@@ -5,7 +5,7 @@ import {
   USER_LOGOUT
 } from "../actions/auth.actions.jsx";
 
-export default function(state = { isAuthenticated: false }, action) {
+export default function(state = {}, action) {
   console.log("auth.reducer action:", action);
   console.log("auth.reducer state:", state);
 

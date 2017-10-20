@@ -2,14 +2,14 @@ const express = require("express");
 const router = express.Router();
 const path = require("path");
 
-// // Checks if user is authenticated before proceeding
-// router.use(passport.authenticate("local"), (req, res, next) => {
-//   next();
-// });
-
 // Handles Ajax request for user information
 router.get("/", function(req, res) {
-  res.send(req.user);
+  console.log("GET /user -> req.isAuthenticated:", req.isAuthenticated());
+  if (!req.isAuthenticated()) {
+    res.sendStatus(401);
+  } else {
+    res.send(req.user);
+  }
 });
 
 // clear all server session information about this user

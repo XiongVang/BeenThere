@@ -17,12 +17,7 @@ class LandingContainer extends Component {
   }
 
   render() {
-    console.log("LandingContainer props:", this.props);
-    if (this.props.isAuthenticated) {
-      return <Redirect to="/userpage" />;
-    } else {
-      return <Landing />;
-    }
+    return <Landing />;
   }
 }
 

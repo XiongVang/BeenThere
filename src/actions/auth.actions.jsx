@@ -24,7 +24,7 @@ export function logout() {
 
 export function login(user) {
   console.log("action.login -> user:", user);
-  const request = axios.get("/user", user);
+  const request = axios.post("/", user);
 
   return {
     type: USER_LOGIN,

@@ -5,6 +5,7 @@ import { bindActionCreators } from "redux";
 import { Redirect } from "react-router-dom";
 
 import LoginForm from "./loginForm.component.jsx";
+import SyncValidationForm from "./syncValidationForm.component.jsx";
 
 class LoginContainer extends Component {
   constructor(props) {
@@ -13,7 +14,7 @@ class LoginContainer extends Component {
     console.log("LoginContainer -> props:", props);
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.props.authenticate();
     console.log("LoginContainer -> props:", this.props);
   }

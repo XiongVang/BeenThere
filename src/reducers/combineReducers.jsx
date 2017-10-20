@@ -7,8 +7,8 @@ import authReducer from "./auth.reducer.jsx";
 import userReducer from "./user.reducer.jsx";
 
 export default combineReducers({
-  formReducer,
-  registerReducer,
-  authReducer,
-  userReducer
+  form: formReducer,
+  registerReducer: registerReducer,
+  authReducer: authReducer,
+  userReducer: userReducer
 });

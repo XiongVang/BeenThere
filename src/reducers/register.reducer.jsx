@@ -1,6 +1,6 @@
 import { updateObject } from "./reducer.utils.jsx";
 import { REGISTER_USER } from "../actions/auth.actions.jsx";
-import { SET_IS_REGESTERED } from "../actions/util.actions.jsx";
+import { SET_IS_REGISTERED } from "../actions/util.actions.jsx";
 
 export default function(state = {}, action) {
   console.log("register.reducer action:", action);
@@ -15,7 +15,7 @@ export default function(state = {}, action) {
         ? updateObject(state, notReg)
         : updateObject(state, isReg);
       break;
-    case SET_IS_REGESTERED:
+    case SET_IS_REGISTERED:
       return updateObject(state, { isRegistered: action.payload });
       break;
   }
