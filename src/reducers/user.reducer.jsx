@@ -1,4 +1,4 @@
-import { updateObject } from "./reducer.utils.jsx";
+import { updateObject } from "./utils.module.jsx";
 import { USER_LOGIN } from "../actions/auth.actions.jsx";
 
 export default function(state = {}, action) {

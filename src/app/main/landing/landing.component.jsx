@@ -1,20 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Landing = (props) => {
+const Landing = props => {
   return (
     <div className="jumbotron jumbotron-fluid">
       <div className="container">
-        <h1 className="display-3">Hello, world!</h1>
-        <p className="lead">
-          This is a simple hero unit, a simple jumbotron-style component for
-          calling extra attention to featured content or information.
-        </p>
+        <h1 className="display-3">Welcome!</h1>
+        <p className="lead">Store and share your travel memories here.</p>
         <hr className="my-4" />
-        <p>
-          It uses utility classes for typography and spacing to space content
-          out within the larger container.
-        </p>
+        <p>Register to start.</p>
         <p className="lead">
           <Link className="btn btn-primary btn-lg" role="button" to="/newuser">
             Register
@@ -29,4 +23,4 @@ const Landing = (props) => {
   );
 };
 
-export default Landing;
+export default (Landing);

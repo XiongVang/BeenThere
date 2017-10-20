@@ -13,12 +13,13 @@ class HeaderContainer extends Component {
 
   render() {
     return (
-      <header>
-        <NavBar
-          handleLogout={this.props.logout}
-          isAuthenticated={this.props.isAuthenticated}
-        />
-      </header>
+
+        <header className="bmd-layout-header">
+          <NavBar
+            handleLogout={this.props.logout}
+            isAuthenticated={this.props.isAuthenticated}
+          />
+        </header>
     );
   }
 }

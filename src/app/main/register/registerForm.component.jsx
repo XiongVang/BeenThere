@@ -6,23 +6,27 @@ let Form = props => {
   return (
     <form onSubmit={handleSubmit}>
       <div className="form-group">
-        {/* <label htmlFor="username">Username</label> */}
+        <label htmlFor="username" className="bmd-label-floating">
+          Username
+        </label>
         <Field
           className="form-control"
           name="username"
           component="input"
           type="text"
-          placeholder="Enter username"
+          id="username"
         />
       </div>
       <div className="form-group">
-        {/* <label htmlFor="password">Password</label> */}
+        <label htmlFor="password" className="bmd-label-floating">
+          Password
+        </label>
         <Field
           className="form-control"
           name="password"
           component="input"
           type="password"
-          placeholder="Enter password"
+          id="password"
         />
       </div>
       <button type="submit" className="btn btn-primary">

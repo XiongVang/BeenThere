@@ -1,4 +1,4 @@
-import { updateObject } from "./reducer.utils.jsx";
+import { updateObject } from "./utils.module.jsx";
 import {
   AUTHENTICATE,
   USER_LOGIN,

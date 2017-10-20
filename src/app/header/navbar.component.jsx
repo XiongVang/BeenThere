@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link, Route } from "react-router-dom";
 
 // components
-import AuthButton from "./authButton.component.jsx";
+import AuthButtonGroup from "./authButtonGroup.component.jsx";
 
 class NavBar extends Component {
   constructor(props) {
@@ -16,14 +16,26 @@ class NavBar extends Component {
 
   render() {
     return (
-      <nav className="navbar sticky-top navbar-light bg-light">
+      <nav className="navbar sticky-top navbar-light ">
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-toggle="drawer"
+          data-target="#dw-s1"
+        >
+          <span className="sr-only">Toggle drawer</span>
+          <i className="material-icons">menu</i>
+        </button>
         <Link className="navbar-brand" to="/">
           BeenThere
         </Link>
-        <AuthButton
-          handleLogout={this.props.handleLogout}
-          isAuthenticated={this.props.isAuthenticated}
-        />
+        <div className="nav navbar-nav">
+          <AuthButtonGroup
+            className="nav-item"
+            handleLogout={this.props.handleLogout}
+            isAuthenticated={this.props.isAuthenticated}
+          />
+        </div>
       </nav>
     );
   }

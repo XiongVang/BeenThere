@@ -27,6 +27,7 @@ class LoginContainer extends Component {
     const { isAuthenticated } = this.props;
     return (
       <div className="card">
+        <div class="card-header">Login Info:</div>
         <div className="card-body">
           {isAuthenticated ? (
             <Redirect to="/home" />

@@ -11,7 +11,7 @@ import NoMatch from "./error/error.component.jsx";
 
 const Main = () => {
   return (
-    <main>
+    <main className="bmd-layout-content">
       <Switch>
         <Route exact path="/about" component={About} />
         <Route path="/newuser" component={RegisterContainer} />

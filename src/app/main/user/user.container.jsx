@@ -14,16 +14,16 @@ class UserContainer extends Component {
     this.props.authenticate();
     console.log("LoginContainer -> props:", this.props);
   }
+
   render() {
-    return (
-      <Route
-        render={() =>
-          this.props.isAuthenticated ? (
-            <h2 className="card">User Page</h2>
-          ) : (
-            <Redirect to="/login" />
-          )}
-      />
+    return this.props.isAuthenticated ? (
+      <div className="card">
+        <div className="card-body">
+          <h2>User Page</h2>
+        </div>
+      </div>
+    ) : (
+      <Redirect to="/login" />
     );
   }
 }
