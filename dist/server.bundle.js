@@ -27,7 +27,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "f50079107f264732de58"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "606cb6e0a3a820ff9739"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -847,16 +847,15 @@
 	
 	const express = __webpack_require__(2);
 	const router = express.Router();
-	const passport = __webpack_require__(5);
 	const path = __webpack_require__(14);
 	
-	// Checks if user is authenticated before proceeding
-	router.use(passport.authenticate("local"), (req, res, next) => {
-	  next();
-	});
+	// // Checks if user is authenticated before proceeding
+	// router.use(passport.authenticate("local"), (req, res, next) => {
+	//   next();
+	// });
 	
-	// Handles Ajax request for user information if user is authenticated
-	router.get("/", (req, res) => {
+	// Handles Ajax request for user information
+	router.get("/", function (req, res) {
 	  res.send(req.user);
 	});
 	
@@ -884,10 +883,6 @@
 	const router = express.Router();
 	const Users = __webpack_require__(7);
 	const path = __webpack_require__(14);
-	
-	router.get("/", (req, res, next) => {
-	  res.send({ message: "Succes!" });
-	});
 	
 	// Handles POST request with new user data
 	router.post("/", (req, res, next) => {

@@ -1,24 +1,20 @@
-import { REGISTER_USER } from "../actions/register.action.jsx";
+import _ from "lodash";
+import { REGISTER_USER } from "../actions/auth.actions.jsx";
+import { SET_IS_REGESTERED } from "../actions/util.actions.jsx";
 
 export default function(state = {}, action) {
-  console.log("register user action", action);
-  let register = () => {
-    if (action.payload.error) {
-      console.log("user registration error:", action.payload);
-      return Object.assign({}, state, {
-        isRegistered: false
-      });
-    } else {
-      console.log("user registeration success");
-      return Object.assign({}, state, {
-        isRegistered: true
-      });
-    }
-  };
+  console.log("register.reducer action:", action);
+  console.log("register.reducer state:", state);
+
+  const isReg = { isRegistered: true };
+  const notReg = { isRegistered: false };
 
   switch (action.type) {
     case REGISTER_USER:
-      register();
+      return action.error ? _.assign(state, notReg) : _.assign(state, isReg);
+      break;
+    case SET_IS_REGESTERED:
+      return _.assign(state, { isRegistered: action.payload });
       break;
   }
 

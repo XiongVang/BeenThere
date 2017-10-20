@@ -1,15 +1,14 @@
 const express = require("express");
 const router = express.Router();
-const passport = require("passport");
 const path = require("path");
 
-// Checks if user is authenticated before proceeding
-router.use(passport.authenticate("local"), (req, res, next) => {
-  next();
-});
+// // Checks if user is authenticated before proceeding
+// router.use(passport.authenticate("local"), (req, res, next) => {
+//   next();
+// });
 
-// Handles Ajax request for user information if user is authenticated
-router.get("/", (req, res) => {
+// Handles Ajax request for user information
+router.get("/", function(req, res) {
   res.send(req.user);
 });
 

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchUser } from "../../../actions/user.action.jsx";
+import { fetchUser } from "../../../actions/user.actions.jsx";
+import { authenticate } from "../../../actions/auth.actions.jsx";
 import { bindActionCreators } from "redux";
 import { Route, Redirect } from "react-router-dom";
 
@@ -9,6 +10,9 @@ class UserContainer extends Component {
     super(props);
   }
 
+  componentDidMount() {
+    this.props.authenticate();
+  }
   render() {
     return (
       <Route
@@ -24,13 +28,10 @@ class UserContainer extends Component {
 }
 
 function mapStateToProps(store) {
-  return {
-    user: store.user,
-    isAuthenticated: store.auth.isAuthenticated
-  };
+  return { isAuthenticated: store.auth.isAuthenticated };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchUser }, dispatch);
+  return bindActionCreators({ fetchUser, authenticate }, dispatch);
 }
 export default connect(mapStateToProps, mapDispatchToProps)(UserContainer);

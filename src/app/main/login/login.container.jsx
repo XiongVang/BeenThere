@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { login } from "../../../actions/login.action.jsx";
+import { login, authenticate } from "../../../actions/auth.actions.jsx";
 import { bindActionCreators } from "redux";
 import { Route, Redirect } from "react-router-dom";
 
@@ -9,8 +9,11 @@ import LoginForm from "./loginForm.component.jsx";
 class LoginContainer extends Component {
   constructor(props) {
     super(props);
-
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.authenticate();
   }
 
   handleSubmit(values) {
@@ -37,11 +40,10 @@ class LoginContainer extends Component {
 }
 
 function mapStateToProps(store) {
-  console.log("Login state", store);
   return { isAuthenticated: store.auth.isAuthenticated };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ login }, dispatch);
+  return bindActionCreators({ login, authenticate }, dispatch);
 }
 export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer);

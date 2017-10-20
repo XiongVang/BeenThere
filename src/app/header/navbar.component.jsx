@@ -1,29 +1,29 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { Component } from "react";
+import { Link, Route } from "react-router-dom";
+import AuthButton from "./authButton.component.jsx";
 
-const NavBar = props => {
-  console.log("NavBar props:", props);
-  
-  const loginOrLogout = props.isAuthenticated ? (
-    <button
-      onClick={props.onLogout}
-      className="btn btn-outline-success my-2 my-sm-0"
-    >
-      Logout
-    </button>
-  ) : (
-    <button className="btn btn-outline-success my-2 my-sm-0">
-      <Link to="/login">Login</Link>
-    </button>
-  );
+class NavBar extends Component {
+  constructor(props) {
+    super(props);
+  }
 
-  return (
-    <nav className="navbar sticky-top navbar-light bg-light">
-      <Link className="navbar-brand" to="/">
-        BeenThere
-      </Link>
-      {loginOrLogout}
-    </nav>
-  );
-};
+  shouldComponentUpdate() {
+    console.log("NavBar updated");
+    return true;
+  }
+
+  render() {
+    return (
+      <nav className="navbar sticky-top navbar-light bg-light">
+        <Link className="navbar-brand" to="/">
+          BeenThere
+        </Link>
+        <AuthButton
+          handleLogout={this.props.handleLogout}
+          isAuthenticated={this.props.isAuthenticated}
+        />
+      </nav>
+    );
+  }
+}
 export default NavBar;

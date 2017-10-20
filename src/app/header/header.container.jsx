@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { logout } from "../../actions/logout.action.jsx";
+import { logout, authenticate } from "../../actions/auth.actions.jsx";
 
 import NavBar from "./navbar.component.jsx";
 
@@ -15,7 +15,7 @@ class HeaderContainer extends Component {
     return (
       <header>
         <NavBar
-          onLogout={this.props.logout}
+          handleLogout={this.props.logout}
           isAuthenticated={this.props.isAuthenticated}
         />
       </header>
@@ -24,7 +24,7 @@ class HeaderContainer extends Component {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ logout }, dispatch);
+  return bindActionCreators({ logout, authenticate }, dispatch);
 }
 
 function mapStateToProps(store) {

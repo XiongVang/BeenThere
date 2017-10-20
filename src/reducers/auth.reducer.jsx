@@ -1,23 +1,32 @@
-import { LOGIN_USER } from "../actions/login.action.jsx";
-import { LOGOUT_USER } from "../actions/logout.action.jsx";
+import _ from "lodash";
+import {
+  AUTHENTICATE,
+  USER_LOGIN,
+  USER_LOGOUT
+} from "../actions/auth.actions.jsx";
 
-export default function(state = { isAuthenticated: false }, action) {
-  console.log("login state", state);
+export default function(state = {}, action) {
+  console.log("auth.reducer action:", action);
+  console.log("auth.reducer state:", state);
+
+  const isAuth = { isAuthenticated: true };
+  const notAuth = { isAuthenticated: false };
 
   switch (action.type) {
-    case LOGIN_USER:
-      return action.payload.error
-        ? state
-        : Object.assign({}, state, {
-            isAuthenticated: true
-          });
+    case AUTHENTICATE:
+      return action.error
+        ? _.assign(state, notAuth)
+        : _.assign(state, isAuth);
       break;
-    case LOGOUT_USER:
-      return action.payload.error
-        ? state
-        : Object.assign({}, state, {
-            isAuthenticated: false
-          });
+    case USER_LOGIN:
+      return action.error
+        ? _.assign(state, notAuth)
+        : _.assign(state, isAuth);
+      break;
+    case USER_LOGOUT:
+      return action.error
+        ? _.assign(state, isAuth)
+        : _.assign(state, notAuth);
       break;
   }
 
