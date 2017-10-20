@@ -1,4 +1,4 @@
-import _ from "lodash";
+import { updateObject } from "./reducer.utils.jsx";
 import { USER_LOGIN } from "../actions/auth.actions.jsx";
 
 export default function(state = {}, action) {
@@ -7,7 +7,7 @@ export default function(state = {}, action) {
 
   switch (action.type) {
     case USER_LOGIN:
-      return action.error ? state : _.assign(state, action.payload.data);
+      return action.error ? state : updateObject(state, action.payload.data);
       break;
   }
 

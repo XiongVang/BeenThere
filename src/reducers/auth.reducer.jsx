@@ -1,11 +1,11 @@
-import _ from "lodash";
+import { updateObject } from "./reducer.utils.jsx";
 import {
   AUTHENTICATE,
   USER_LOGIN,
   USER_LOGOUT
 } from "../actions/auth.actions.jsx";
 
-export default function(state = {}, action) {
+export default function(state = { isAuthenticated: false }, action) {
   console.log("auth.reducer action:", action);
   console.log("auth.reducer state:", state);
 
@@ -15,18 +15,18 @@ export default function(state = {}, action) {
   switch (action.type) {
     case AUTHENTICATE:
       return action.error
-        ? _.assign(state, notAuth)
-        : _.assign(state, isAuth);
+        ? updateObject(state, notAuth)
+        : updateObject(state, isAuth);
       break;
     case USER_LOGIN:
       return action.error
-        ? _.assign(state, notAuth)
-        : _.assign(state, isAuth);
+        ? updateObject(state, notAuth)
+        : updateObject(state, isAuth);
       break;
     case USER_LOGOUT:
       return action.error
-        ? _.assign(state, isAuth)
-        : _.assign(state, notAuth);
+        ? updateObject(state, isAuth)
+        : updateObject(state, notAuth);
       break;
   }
 

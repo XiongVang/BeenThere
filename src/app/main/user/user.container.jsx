@@ -12,6 +12,7 @@ class UserContainer extends Component {
 
   componentDidMount() {
     this.props.authenticate();
+    console.log("LoginContainer -> props:", this.props);
   }
   render() {
     return (
@@ -28,7 +29,7 @@ class UserContainer extends Component {
 }
 
 function mapStateToProps(store) {
-  return { isAuthenticated: store.auth.isAuthenticated };
+  return { isAuthenticated: store.authReducer.isAuthenticated };
 }
 
 function mapDispatchToProps(dispatch) {

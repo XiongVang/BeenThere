@@ -17,6 +17,7 @@ class RegisterContainer extends Component {
 
   componentDidMount() {
     this.props.authenticate();
+    console.log("RegisterContainer -> props:", this.props);
   }
 
   handleSubmit(values) {
@@ -46,8 +47,8 @@ class RegisterContainer extends Component {
 
 function mapStateToProps(store) {
   return {
-    isAuthenticated: store.auth.isAuthenticated,
-    isRegistered: store.register.isRegistered
+    isAuthenticated: store.authReducer.isAuthenticated,
+    isRegistered: store.registerReducer.isRegistered
   };
 }
 function mapDispatchToProps(dispatch) {

@@ -28,7 +28,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(store) {
-  return { isAuthenticated: store.auth.isAuthenticated };
+  return { isAuthenticated: store.authReducer.isAuthenticated };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(HeaderContainer);
