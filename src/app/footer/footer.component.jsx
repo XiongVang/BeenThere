@@ -1,15 +1,13 @@
 import React from "react";
-
-const Footer = () => {
+import { Link } from "react-router-dom";
+const FooterContainer = () => {
   return (
-    <footer>
-      <div className="sticky-bottom">
-        <p>
-          <i className="material-icons">copyright</i> Xiong Vang 2017
-        </p>
+    <footer className="page-footer blue-grey darken-3">
+      <div className="footer-copyright">
+        <div className="container">Made by Xiong Vang 2017</div>
       </div>
     </footer>
   );
 };
 
-export default Footer;
+export default FooterContainer;

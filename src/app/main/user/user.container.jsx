@@ -5,6 +5,8 @@ import { authenticate } from "../../../actions/auth.actions.jsx";
 import { bindActionCreators } from "redux";
 import { Route, Redirect } from "react-router-dom";
 
+import User from "./user.component.jsx";
+
 class UserContainer extends Component {
   constructor(props) {
     super(props);
@@ -16,15 +18,7 @@ class UserContainer extends Component {
   }
 
   render() {
-    return this.props.isAuthenticated ? (
-      <div className="card">
-        <div className="card-body">
-          <h2>User Page</h2>
-        </div>
-      </div>
-    ) : (
-      <Redirect to="/login" />
-    );
+    return this.props.isAuthenticated ? <User /> : <Redirect to="/login" />;
   }
 }
 

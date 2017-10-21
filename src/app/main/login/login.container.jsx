@@ -5,7 +5,6 @@ import { bindActionCreators } from "redux";
 import { Redirect } from "react-router-dom";
 
 import LoginForm from "./loginForm.component.jsx";
-import SyncValidationForm from "./syncValidationForm.component.jsx";
 
 class LoginContainer extends Component {
   constructor(props) {
@@ -26,14 +25,16 @@ class LoginContainer extends Component {
   render() {
     const { isAuthenticated } = this.props;
     return (
-      <div className="card">
-        <div class="card-header">Login Info:</div>
-        <div className="card-body">
-          {isAuthenticated ? (
-            <Redirect to="/home" />
-          ) : (
-            <LoginForm onSubmit={this.handleSubmit} />
-          )}
+      <div className="row justify-content-center no-gutters">
+        <div className="card">
+          <div className="card-header">Login Info:</div>
+          <div className="card-body">
+            {isAuthenticated ? (
+              <Redirect to="/home" />
+            ) : (
+              <LoginForm onSubmit={this.handleSubmit} />
+            )}
+          </div>
         </div>
       </div>
     );

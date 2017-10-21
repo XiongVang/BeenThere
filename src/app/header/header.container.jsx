@@ -4,7 +4,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { logout, authenticate } from "../../actions/auth.actions.jsx";
 
-import NavBar from "./navbar.component.jsx";
+import NotAuthNavBar from "./notAuthNavbar.component.jsx";
 
 class HeaderContainer extends Component {
   constructor(props) {
@@ -13,13 +13,9 @@ class HeaderContainer extends Component {
 
   render() {
     return (
-
-        <header className="bmd-layout-header">
-          <NavBar
-            handleLogout={this.props.logout}
-            isAuthenticated={this.props.isAuthenticated}
-          />
-        </header>
+      <header>
+        <NotAuthNavBar />
+      </header>
     );
   }
 }

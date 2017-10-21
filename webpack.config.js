@@ -4,7 +4,7 @@ module.exports = {
   entry: "./src/store.jsx",
   output: {
     path: __dirname + "/public",
-    filename: "app.bundle.js"
+    filename: "js/app.bundle.js"
   },
   module: {
     loaders: [

@@ -13,7 +13,6 @@ class LandingContainer extends Component {
 
   componentDidMount() {
     this.props.authenticate();
-    console.log("LandingContainer -> props:", this.props);
   }
 
   render() {

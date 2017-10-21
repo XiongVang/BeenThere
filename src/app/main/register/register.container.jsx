@@ -30,7 +30,7 @@ class RegisterContainer extends Component {
   render() {
     return (
       <div className="card">
-        <div class="card-header">Registration Info:</div>
+        <div className="card-header">Registration Info:</div>
         <div className="card-body">
           <Route
             render={() =>
