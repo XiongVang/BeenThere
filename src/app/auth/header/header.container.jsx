@@ -1,17 +1,18 @@
 import React, { Component } from "react";
-import { Link, withRouter } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { logout, authenticate } from "../../actions/auth.actions.jsx";
 
+// components
 import NotAuthNavBar from "./notAuthNavbar.component.jsx";
 import IsAuthNavBar from "./isAuthNavbar.component.jsx";
+
+// actions
+import { logout } from "../auth.actions.jsx";
 
 class HeaderContainer extends Component {
   constructor(props) {
     super(props);
   }
-
   render() {
     const { logout, isAuthenticated } = this.props;
     return (
@@ -30,12 +31,12 @@ class HeaderContainer extends Component {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ logout }, dispatch);
-}
-
 function mapStateToProps(store) {
   return { isAuthenticated: store.authReducer.isAuthenticated };
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ logout }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(HeaderContainer);

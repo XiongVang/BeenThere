@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { login, authenticate } from "../../../actions/auth.actions.jsx";
 import { bindActionCreators } from "redux";
 import { Redirect } from "react-router-dom";
+
+// actions
+import { login, authenticate } from "../../auth.actions.jsx";
 
 import LoginForm from "./loginForm.component.jsx";
 

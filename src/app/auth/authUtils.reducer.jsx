@@ -1,6 +1,6 @@
-import { updateObject } from "./utils.module.jsx";
-import { REGISTER_USER } from "../actions/auth.actions.jsx";
-import { SET_IS_REGISTERED } from "../actions/util.actions.jsx";
+import { updateObject } from "../utils.module.jsx";
+import { REGISTER_USER } from "./auth.actions.jsx";
+import { SET_IS_REGISTERED } from "./authUtil.actions.jsx";
 
 export default function(state = {}, action) {
   console.log("register.reducer action:", action);

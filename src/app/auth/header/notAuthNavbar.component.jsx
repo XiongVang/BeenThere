@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
-const IsAuthNavbar = props => {
+const NotAuthNavbar = () => {
   return (
     <div className="nav-wrapper container">
       {/* logo */}
@@ -12,8 +12,8 @@ const IsAuthNavbar = props => {
       {/* hamburger icon - hidden for desktop only*/}
       <a
         href="#"
-        data-activates="is-auth-dropdown"
-        className="right hide-on-large-only is-auth-dropdown"
+        data-activates="not-auth-dropdown"
+        className="right hide-on-large-only not-auth-dropdown"
       >
         <i className="material-icons">more_vert</i>
       </a>
@@ -21,30 +21,30 @@ const IsAuthNavbar = props => {
       {/* regular nav links - hidden for tablets or smaller */}
       <ul className="right hide-on-med-and-down">
         <li>
-          <Link to="/home">
-            <i className="material-icons">account_circle</i>
-          </Link>
+          <Link to="/login">Login</Link>
         </li>
         <li>
-          <Link to="/" onClick={props.handleLogout}>
-            Logout
-          </Link>
+          <Link to="/newuser">Register</Link>
+        </li>
+        <li>
+          <Link to="/about">About</Link>
         </li>
       </ul>
 
       {/* dropdown menu */}
-      <ul id="is-auth-dropdown" className="dropdown-content">
+      <ul id="not-auth-dropdown" className="dropdown-content">
         <li>
-          <Link to="/home">Home</Link>
+          <Link to="/login">Login</Link>
         </li>
         <li>
-          <Link to="/" onClick={props.handleLogout}>
-            Logout
-          </Link>
+          <Link to="/newuser">Register</Link>
+        </li>
+        <li>
+          <Link to="/about">About</Link>
         </li>
       </ul>
     </div>
   );
 };
 
-export default IsAuthNavbar;
+export default NotAuthNavbar;

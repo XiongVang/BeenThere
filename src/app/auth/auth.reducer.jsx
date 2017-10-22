@@ -1,9 +1,7 @@
-import { updateObject } from "./utils.module.jsx";
-import {
-  AUTHENTICATE,
-  USER_LOGIN,
-  USER_LOGOUT
-} from "../actions/auth.actions.jsx";
+import { updateObject } from "../utils.module.jsx";
+
+// action types
+import { AUTHENTICATE, USER_LOGIN, USER_LOGOUT } from "./auth.actions.jsx";
 
 export default function(state = {}, action) {
   console.log("auth.reducer action:", action);

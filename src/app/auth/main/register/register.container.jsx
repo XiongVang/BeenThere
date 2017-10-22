@@ -4,8 +4,8 @@ import { bindActionCreators } from "redux";
 import { Route, Redirect } from "react-router-dom";
 
 // actions
-import { register, authenticate } from "../../../actions/auth.actions.jsx";
-import { setIsRegistered } from "../../../actions/util.actions.jsx";
+import { register, authenticate } from "../../auth.actions.jsx";
+import { setIsRegistered } from "../../authUtil.actions.jsx";
 
 import RegisterForm from "./registerForm.component.jsx";
 
@@ -48,7 +48,7 @@ class RegisterContainer extends Component {
 function mapStateToProps(store) {
   return {
     isAuthenticated: store.authReducer.isAuthenticated,
-    isRegistered: store.utilsReducer.isRegistered
+    isRegistered: store.authUtilsReducer.isRegistered
   };
 }
 function mapDispatchToProps(dispatch) {
