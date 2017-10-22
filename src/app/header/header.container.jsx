@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { logout, authenticate } from "../../actions/auth.actions.jsx";
 
 import NotAuthNavBar from "./notAuthNavbar.component.jsx";
+import IsAuthNavBar from "./isAuthNavbar.component.jsx";
 
 class HeaderContainer extends Component {
   constructor(props) {
@@ -12,16 +13,25 @@ class HeaderContainer extends Component {
   }
 
   render() {
+    const { logout, isAuthenticated } = this.props;
     return (
       <header>
-        <NotAuthNavBar />
+        <div className="navbar-fixed">
+          <nav className="teal" role="navigation">
+            {isAuthenticated ? (
+              <IsAuthNavBar handleLogout={logout} />
+            ) : (
+              <NotAuthNavBar />
+            )}
+          </nav>
+        </div>
       </header>
     );
   }
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ logout, authenticate }, dispatch);
+  return bindActionCreators({ logout }, dispatch);
 }
 
 function mapStateToProps(store) {

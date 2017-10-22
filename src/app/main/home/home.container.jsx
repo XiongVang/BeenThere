@@ -5,9 +5,9 @@ import { authenticate } from "../../../actions/auth.actions.jsx";
 import { bindActionCreators } from "redux";
 import { Route, Redirect } from "react-router-dom";
 
-import User from "./user.component.jsx";
+import Home from "./home.component.jsx";
 
-class UserContainer extends Component {
+class HomeContainer extends Component {
   constructor(props) {
     super(props);
   }
@@ -18,7 +18,7 @@ class UserContainer extends Component {
   }
 
   render() {
-    return this.props.isAuthenticated ? <User /> : <Redirect to="/login" />;
+    return this.props.isAuthenticated ? <Home /> : <Redirect to="/login" />;
   }
 }
 
@@ -29,4 +29,4 @@ function mapStateToProps(store) {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({ fetchUser, authenticate }, dispatch);
 }
-export default connect(mapStateToProps, mapDispatchToProps)(UserContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(HomeContainer);

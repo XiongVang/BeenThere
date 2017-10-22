@@ -24,17 +24,15 @@ class LoginContainer extends Component {
 
   render() {
     const { isAuthenticated } = this.props;
+
     return (
-      <div className="row justify-content-center no-gutters">
-        <div className="card">
-          <div className="card-header">Login Info:</div>
-          <div className="card-body">
-            {isAuthenticated ? (
-              <Redirect to="/home" />
-            ) : (
-              <LoginForm onSubmit={this.handleSubmit} />
-            )}
-          </div>
+      <div className=" container center-align">
+        <div className=" card ">
+          {isAuthenticated ? (
+            <Redirect to="/home" />
+          ) : (
+            <LoginForm onSubmit={this.handleSubmit} />
+          )}
         </div>
       </div>
     );

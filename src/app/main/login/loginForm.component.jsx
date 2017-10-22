@@ -1,38 +1,42 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
 
-let Form = props => {
+const Form = props => {
   const { handleSubmit } = props;
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="form-group">
-        <label htmlFor="username" className="bmd-label-floating">
-          Username
-        </label>
-        <Field
-          className="form-control"
-          name="username"
-          component="input"
-          type="text"
-          id="username"
-        />
-      </div>
-      <div className="form-group">
-        <label htmlFor="password" className="bmd-label-floating">
-          Password
-        </label>
-        <Field
-          className="form-control"
-          name="password"
-          component="input"
-          type="password"
-          id="password"
-        />
-      </div>
-      <button type="submit" className="btn btn-primary">
-        Login
-      </button>
-    </form>
+    <div className="section center-align">
+      <form onSubmit={handleSubmit} className="container col s3">
+        <div className="input-field col s3">
+          <Field
+            className="validate"
+            name="username"
+            component="input"
+            type="text"
+            id="username"
+          />
+          <label htmlFor="username">Username</label>
+        </div>
+        <div className="input-field col s3">
+          <Field
+            className="validate"
+            name="password"
+            component="input"
+            type="password"
+            id="password"
+          />
+          <label htmlFor="password">Password</label>
+        </div>
+        <div className="section">
+          <button
+            className=" btn waves-effect waves-light"
+            type="submit"
+            name="Submit"
+          >
+            Login
+          </button>
+        </div>
+      </form>
+    </div>
   );
 };
 

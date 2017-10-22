@@ -29,9 +29,8 @@ class RegisterContainer extends Component {
   }
   render() {
     return (
-      <div className="card">
-        <div className="card-header">Registration Info:</div>
-        <div className="card-body">
+      <div className=" container center-align">
+        <div className=" card ">
           <Route
             render={() =>
               this.props.isRegistered || this.props.isAuthenticated ? (

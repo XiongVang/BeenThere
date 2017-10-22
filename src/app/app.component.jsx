@@ -8,7 +8,7 @@ import Main from "./main/main.component.jsx";
 const App = () => {
   return (
     <BrowserRouter>
-      <div className="container">
+      <div >
         <Header />
         <Main />
         <Footer />
