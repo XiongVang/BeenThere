@@ -13,7 +13,7 @@ const NotAuthNavbar = () => {
       <a
         href="#"
         data-activates="not-auth-dropdown"
-        className="right hide-on-large-only not-auth-dropdown"
+        className="right hide-on-large-only not-auth-dropdown-trigger"
       >
         <i className="material-icons">more_vert</i>
       </a>

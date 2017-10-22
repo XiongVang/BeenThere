@@ -14,7 +14,7 @@ const IsAuthNavbar = props => {
       <a
         href="#"
         data-activates="is-auth-dropdown"
-        className="right hide-on-large-only is-auth-dropdown"
+        className="right hide-on-large-only is-auth-dropdown-trigger"
       >
         <i className="material-icons">more_vert</i>
       </a>
@@ -23,7 +23,7 @@ const IsAuthNavbar = props => {
       <ul className="right hide-on-med-and-down">
         <li>
           <Link to="/home">
-            <i className="material-icons">account_circle</i>
+            <i className="user-icon material-icons">account_circle</i>
           </Link>
         </li>
         <li>
@@ -36,7 +36,9 @@ const IsAuthNavbar = props => {
       {/* dropdown menu */}
       <ul id="is-auth-dropdown" className="dropdown-content">
         <li>
-          <Link to="/home">Home</Link>
+          <Link className="user-icon" to="/home">
+            Home
+          </Link>
         </li>
         <li>
           <Link to="/" onClick={handleLogout}>

@@ -1,3 +1,9 @@
+/* Customize */
+.add-trip-fab {
+  padding-right: 10px;
+  padding-top: 10px;
+}
+
 /** MATERIAL ICONS **/
 /* fallback */
 @font-face {
@@ -39,13 +45,24 @@
   font-size: inherit;
 }
 
+/* support for sticky footer */
 body {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
 }
 
-/* support for sticky footer */
 main {
   flex: 1 0 auto;
+}
+
+/* support for fixed side nav */
+.user-home-page {
+  padding-left: 300px;
+}
+
+@media only screen and (max-width: 992px) {
+  .user-home-page {
+    padding-left: 0;
+  }
 }
