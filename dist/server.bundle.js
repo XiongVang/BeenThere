@@ -27,7 +27,11 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
+<<<<<<< HEAD
 /******/ 	var hotCurrentHash = "a2072124e21750d2656d"; // eslint-disable-line no-unused-vars
+=======
+/******/ 	var hotCurrentHash = "f34e56be2490ccca3ee3"; // eslint-disable-line no-unused-vars
+>>>>>>> refactor-server-routes
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -553,7 +557,7 @@
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 	
 	const express = __webpack_require__(2);
 	const app = express();
@@ -568,7 +572,11 @@
 	// Route includes
 	const indexRouter = __webpack_require__(13);
 	const userRouter = __webpack_require__(15);
+<<<<<<< HEAD
 	const registerRouter = __webpack_require__(19);
+=======
+	const authRouter = __webpack_require__(16);
+>>>>>>> refactor-server-routes
 	
 	const port = process.env.PORT || 3000;
 	
@@ -577,7 +585,7 @@
 	app.use(bodyParser.urlencoded({ extended: true }));
 	
 	// Serve back static files
-	app.use(express.static('public'));
+	app.use(express.static("public"));
 	
 	// Passport Session Configuration
 	app.use(sessionConfig);
@@ -587,15 +595,15 @@
 	app.use(passport.session());
 	
 	// Routes
-	app.use('/register', registerRouter);
-	app.use('/user', userRouter);
+	app.use("/auth", authRouter);
+	app.use("/user", userRouter);
 	
 	// Catch all bucket, must be last!
-	app.use('/', indexRouter);
+	app.use("/", indexRouter);
 	
 	// Listen //
 	app.listen(port, function () {
-	   console.log('Listening on port:', port);
+	  console.log("Listening on port:", port);
 	});
 
 /***/ }),
@@ -696,56 +704,75 @@
 /* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 	
-	var mongoose = __webpack_require__(8);
-	var Schema = mongoose.Schema;
-	var bcrypt = __webpack_require__(9);
-	var SALT_WORK_FACTOR = 10;
+	const mongoose = __webpack_require__(8);
+	const Schema = mongoose.Schema;
+	const bcrypt = __webpack_require__(9);
+	const SALT_WORK_FACTOR = 10;
 	
 	// Mongoose Schema
-	var UserSchema = new Schema({
-	    username: { type: String, required: true, index: { unique: true } },
-	    password: { type: String, required: true }
+	
+	/** postcard sub doc*/
+	const PostcardSchema = new Schema({
+	  title: { type: String, required: true },
+	  body: { type: String },
+	  date: { type: Date, required: true },
+	  location: { type: String }
+	});
+	
+	/** trip sub doc*/
+	const TripSchema = new Schema({
+	  name: { type: String, required: true },
+	  startDate: { type: Date, required: true },
+	  endDate: { type: Date, required: true },
+	  posts: [PostcardSchema]
+	});
+	
+	/** user collection */
+	const UserSchema = new Schema({
+	  username: { type: String, required: true, index: { unique: true } },
+	  password: { type: String, required: true },
+	  trips: [TripSchema]
 	});
 	
 	// Called before adding a new user to the DB. Encrypts password.
-	UserSchema.pre('save', function (next) {
-	    var user = this;
+	UserSchema.pre("save", function (next) {
+	  const user = this;
 	
-	    if (!user.isModified('password')) {
-	        return next();
+	  if (!user.isModified("password")) {
+	    return next();
+	  }
+	
+	  bcrypt.genSalt(SALT_WORK_FACTOR, function (err, salt) {
+	    if (err) {
+	      return next(err);
 	    }
 	
-	    bcrypt.genSalt(SALT_WORK_FACTOR, function (err, salt) {
-	        if (err) {
-	            return next(err);
-	        }
-	
-	        bcrypt.hash(user.password, salt, function (err, hash) {
-	            if (err) {
-	                return next(err);
-	            }
-	            //IF WE WERE TO CONSOLE LOG RIGHT MEOW, user.password would be 12345
-	            user.password = hash;
-	            next();
-	        });
+	    bcrypt.hash(user.password, salt, function (err, hash) {
+	      if (err) {
+	        return next(err);
+	      }
+	      //IF WE WERE TO CONSOLE LOG RIGHT MEOW, user.password would be 12345
+	      user.password = hash;
+	      next();
 	    });
+	  });
 	});
 	
 	// Used by login methods to compare login form password to DB password
 	UserSchema.methods.comparePassword = function (candidatePassword, callback) {
-	    // 'this' here refers to this instance of the User model
-	    bcrypt.compare(candidatePassword, this.password, function (err, isMatch) {
-	        if (err) {
-	            return callback(err);
-	        }
+	  // 'this' here refers to this instance of the User model
+	  bcrypt.compare(candidatePassword, this.password, function (err, isMatch) {
+	    if (err) {
+	      return callback(err);
+	    }
 	
-	        callback(null, isMatch);
-	    });
+	    callback(null, isMatch);
+	  });
 	};
 	
-	module.exports = mongoose.model('User', UserSchema);
+	module.exports = mongoose.model("User", UserSchema);
 
 /***/ }),
 /* 8 */
@@ -827,6 +854,79 @@
 	const passport = __webpack_require__(5);
 	const path = __webpack_require__(14);
 	
+	router.get("*", (req, res) => {
+	  res.sendFile(path.join(__dirname, "/../public/index.html"));
+	});
+	
+	module.exports = router;
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports) {
+
+	module.exports = require("path");
+
+/***/ }),
+/* 15 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	const express = __webpack_require__(2);
+	const router = express.Router();
+	const path = __webpack_require__(14);
+	
+	// authentication gateway
+	
+	router.use((req, res, next) => {
+	  console.log("user router hit");
+	  if (req.isUnauthenticated()) {
+	    res.sendStatus(401);
+	  } else {
+	    next();
+	  }
+	});
+	
+	// Handles Ajax request for user information
+	router.get("/", function (req, res) {
+	  console.log("GET /user -> req.isAuthenticated:", req.isAuthenticated());
+	  if (!req.isAuthenticated()) {
+	    res.sendStatus(401);
+	  } else {
+	    res.send(req.user);
+	  }
+	});
+	
+	// clear all server session information about this user
+	router.get("/logout", (req, res) => {
+	  // Use passport's built-in method to log out the user
+	  console.log("user logged out");
+	  req.logOut();
+	  res.sendStatus(200);
+	});
+	
+	router.get("*", (req, res) => {
+	  res.sendFile(path.join(__dirname, "/../public/index.html"));
+	});
+	
+	module.exports = router;
+
+/***/ }),
+<<<<<<< HEAD
+/* 16 */,
+=======
+/* 16 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	const express = __webpack_require__(2);
+	const router = express.Router();
+	const passport = __webpack_require__(5);
+	const path = __webpack_require__(14);
+	const Users = __webpack_require__(7);
+	
+	// register
 	router.post("/", (req, res, next) => {
 	  console.log("post /register route");
 	  /*
@@ -853,50 +953,20 @@
 	  });
 	});
 	
+	// login
 	router.put("/", passport.authenticate("local"), function (req, res) {
 	  res.status(200).send(req.user.username);
 	});
 	
-	router.get("*", (req, res) => {
-	  res.sendFile(path.join(__dirname, "/../public/index.html"));
-	});
-	
-	module.exports = router;
-
-/***/ }),
-/* 14 */
-/***/ (function(module, exports) {
-
-	module.exports = require("path");
-
-/***/ }),
-/* 15 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	const express = __webpack_require__(2);
-	const router = express.Router();
-	const path = __webpack_require__(14);
-	
-	// Handles Ajax request for user information
-	router.get("/", function (req, res) {
-	  console.log("GET /user -> req.isAuthenticated:", req.isAuthenticated());
-	  if (!req.isAuthenticated()) {
-	    res.sendStatus(401);
+	// authenticate
+	router.get("/", (req, res) => {
+	  if (req.isAuthenticated()) {
+	    res.sendStatus(200);
 	  } else {
-	    res.send(req.user);
+	    res.sendStatus(401);
 	  }
 	});
 	
-	// clear all server session information about this user
-	router.get("/logout", (req, res) => {
-	  // Use passport's built-in method to log out the user
-	  console.log("Logged out");
-	  req.logOut();
-	  res.sendStatus(200);
-	});
-	
 	router.get("*", (req, res) => {
 	  res.sendFile(path.join(__dirname, "/../public/index.html"));
 	});
@@ -904,7 +974,7 @@
 	module.exports = router;
 
 /***/ }),
-/* 16 */,
+>>>>>>> refactor-server-routes
 /* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 

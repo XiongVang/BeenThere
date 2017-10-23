@@ -24,7 +24,7 @@ const NotAuthNavbar = () => {
           <Link to="/login">Login</Link>
         </li>
         <li>
-          <Link to="/newuser">Register</Link>
+          <Link to="/register">Register</Link>
         </li>
         <li>
           <Link to="/about">About</Link>
@@ -37,7 +37,7 @@ const NotAuthNavbar = () => {
           <Link to="/login">Login</Link>
         </li>
         <li>
-          <Link to="/newuser">Register</Link>
+          <Link to="/register">Register</Link>
         </li>
         <li>
           <Link to="/about">About</Link>

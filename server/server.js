@@ -1,26 +1,26 @@
-const express = require('express');
+const express = require("express");
 const app = express();
-const bodyParser = require('body-parser');
+const bodyParser = require("body-parser");
 
-const passport = require('./strategies/mongo.localstrategy');
-const sessionConfig = require('./modules/session.config');
+const passport = require("./strategies/mongo.localstrategy");
+const sessionConfig = require("./modules/session.config");
 
 //DB Module
-const db = require('./modules/db.config.js');
+const db = require("./modules/db.config.js");
 
 // Route includes
-const indexRouter = require('./routes/index.router');
-const userRouter = require('./routes/user.router');
-const registerRouter = require('./routes/register.router');
+const indexRouter = require("./routes/index.router");
+const userRouter = require("./routes/user.router");
+const authRouter = require("./routes/auth.router");
 
 const port = process.env.PORT || 3000;
 
 // Body parser middleware
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Serve back static files
-app.use(express.static('public'));
+app.use(express.static("public"));
 
 // Passport Session Configuration
 app.use(sessionConfig);
@@ -30,14 +30,13 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Routes
-app.use('/register', registerRouter);
-app.use('/user', userRouter);
+app.use("/auth", authRouter);
+app.use("/user", userRouter);
 
 // Catch all bucket, must be last!
-app.use('/', indexRouter);
-
+app.use("/", indexRouter);
 
 // Listen //
-app.listen(port, function(){
-   console.log('Listening on port:', port);
+app.listen(port, function() {
+  console.log("Listening on port:", port);
 });

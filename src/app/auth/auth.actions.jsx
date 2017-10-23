@@ -1,15 +1,15 @@
 import axios from "axios";
 
-export const AUTHENTICATE = "AUTHENTICATE";
+export const AUTHENTICATION = "AUTHENTICATION";
 export const USER_LOGOUT = "LOGOUT_USER";
 export const USER_LOGIN = "LOGIN_USER";
 export const REGISTER_USER = "REGISTER_USER";
 
 export function authenticate() {
-  const request = axios.get("/user");
+  const request = axios.get("/auth");
 
   return {
-    type: AUTHENTICATE,
+    type: AUTHENTICATION,
     payload: request
   };
 }
@@ -23,7 +23,7 @@ export function logout() {
 }
 
 export function login(user) {
-  const request = axios.put("/", user);
+  const request = axios.put("/auth", user);
 
   return {
     type: USER_LOGIN,
@@ -32,7 +32,7 @@ export function login(user) {
 }
 
 export function register(user) {
-  let request = axios.post("/", user);
+  let request = axios.post("/auth", user);
 
   return {
     type: REGISTER_USER,

@@ -14,7 +14,7 @@ const Main = () => {
       <div>
         <Switch>
           <Route exact path="/about" component={About} />
-          <Route path="/newuser" component={RegisterContainer} />
+          <Route path="/register" component={RegisterContainer} />
           <Route path="/login" component={LoginContainer} />
           <Route path="/:noMatch" component={NoMatch} />
           <Route path="/" component={Landing} />

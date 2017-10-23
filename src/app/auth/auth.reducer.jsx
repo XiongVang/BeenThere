@@ -1,9 +1,9 @@
 import { updateObject } from "../utils.module.jsx";
 
 // action types
-import { AUTHENTICATE, USER_LOGIN, USER_LOGOUT } from "./auth.actions.jsx";
+import { AUTHENTICATION, USER_LOGIN, USER_LOGOUT } from "./auth.actions.jsx";
 
-export default function(state = {}, action) {
+export default function(state = { isAuthenticated: false }, action) {
   console.log("auth.reducer action:", action);
   console.log("auth.reducer state:", state);
 
@@ -11,7 +11,7 @@ export default function(state = {}, action) {
   const notAuth = { isAuthenticated: false };
 
   switch (action.type) {
-    case AUTHENTICATE:
+    case AUTHENTICATION:
       return action.error
         ? updateObject(state, notAuth)
         : updateObject(state, isAuth);
@@ -22,9 +22,7 @@ export default function(state = {}, action) {
         : updateObject(state, isAuth);
       break;
     case USER_LOGOUT:
-      return action.error
-        ? updateObject(state, isAuth)
-        : updateObject(state, notAuth);
+      return updateObject(state, notAuth);
       break;
   }
 

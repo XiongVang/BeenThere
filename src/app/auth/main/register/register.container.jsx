@@ -5,9 +5,9 @@ import { Route, Redirect } from "react-router-dom";
 
 // actions
 import { register, authenticate } from "../../auth.actions.jsx";
-import { setIsRegistered } from "../../authUtil.actions.jsx";
+import { setIsRegistered } from "../../auth_util.actions.jsx";
 
-import RegisterForm from "./registerForm.component.jsx";
+import RegisterForm from "./register_form.component.jsx";
 
 class RegisterContainer extends Component {
   constructor(props) {
@@ -27,18 +27,16 @@ class RegisterContainer extends Component {
   componentWillUnmount() {
     this.props.setIsRegistered(false);
   }
+
   render() {
-    return (
+    const { isRegistered, isAuthenticated } = this.props;
+
+    return isRegistered || isAuthenticated ? (
+      <Redirect to="/login" />
+    ) : (
       <div className=" container center-align">
         <div className=" card ">
-          <Route
-            render={() =>
-              this.props.isRegistered || this.props.isAuthenticated ? (
-                <Redirect to="/login" />
-              ) : (
-                <RegisterForm onSubmit={this.handleSubmit} />
-              )}
-          />
+          <RegisterForm onSubmit={this.handleSubmit} />
         </div>
       </div>
     );
