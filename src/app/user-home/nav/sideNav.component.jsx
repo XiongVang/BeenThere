@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router";
 
-const SideNav = ({ trips = [] }) => {
+const SideNav = props => {
   const side_nav_styles = {
     width: 200
   };
@@ -12,6 +12,7 @@ const SideNav = ({ trips = [] }) => {
     paddingTop: 12
   };
 
+  const { handleLogout } = props;
   return (
     <ul
       style={side_nav_styles}
@@ -33,9 +34,11 @@ const SideNav = ({ trips = [] }) => {
         </div>
       </li>
 
-      {/* log user out */}
+      {/* log out */}
       <li>
-        <a className="waves-effect waves-light btn-flat">Logout</a>
+        <a onClick={handleLogout} className="waves-effect waves-light btn-flat">
+          Logout
+        </a>
       </li>
 
       <li>
@@ -82,8 +85,6 @@ const SideNav = ({ trips = [] }) => {
 };
 
 SideNav.propTypes = {
-  handleAddTrip: PropTypes.func.isRequired,
-  handleLogout: PropTypes.func.isRequired,
-  trips: PropTypes.array
+  handleLogout: PropTypes.func.isRequired
 };
 export default SideNav;

@@ -22,11 +22,12 @@ class HomeContainer extends Component {
   }
 
   render() {
-    return this.props.isAuthenticated ? (
+    const { isAuthenticated, logout } = this.props;
+    return isAuthenticated ? (
       <div className="user-home-page">
         <header>
           <Logo />
-          <SideNav />
+          <SideNav handleLogout={logout} />
         </header>
         <main>
           <Details />
@@ -44,7 +45,7 @@ function mapStateToProps(store) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ authenticate }, dispatch);
+  return bindActionCreators({ authenticate, logout }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeContainer);

@@ -27,18 +27,16 @@ class RegisterContainer extends Component {
   componentWillUnmount() {
     this.props.setIsRegistered(false);
   }
+
   render() {
-    return (
+    const { isRegistered, isAuthenticated } = this.props;
+
+    return isRegistered || isAuthenticated ? (
+      <Redirect to="/login" />
+    ) : (
       <div className=" container center-align">
         <div className=" card ">
-          <Route
-            render={() =>
-              this.props.isRegistered || this.props.isAuthenticated ? (
-                <Redirect to="/login" />
-              ) : (
-                <RegisterForm onSubmit={this.handleSubmit} />
-              )}
-          />
+          <RegisterForm onSubmit={this.handleSubmit} />
         </div>
       </div>
     );

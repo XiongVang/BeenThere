@@ -15,7 +15,7 @@ router.get("/", function(req, res) {
 // clear all server session information about this user
 router.get("/logout", (req, res) => {
   // Use passport's built-in method to log out the user
-  console.log("Logged out");
+  console.log("user logged out");
   req.logOut();
   res.sendStatus(200);
 });

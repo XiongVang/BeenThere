@@ -27,7 +27,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "c3d69174907263c16b8b"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "247030998d2c635ccd67"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -553,7 +553,7 @@
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 	
 	const express = __webpack_require__(2);
 	const app = express();
@@ -568,7 +568,7 @@
 	// Route includes
 	const indexRouter = __webpack_require__(13);
 	const userRouter = __webpack_require__(15);
-	const registerRouter = __webpack_require__(16);
+	const authRouter = __webpack_require__(16);
 	
 	const port = process.env.PORT || 3000;
 	
@@ -577,7 +577,7 @@
 	app.use(bodyParser.urlencoded({ extended: true }));
 	
 	// Serve back static files
-	app.use(express.static('public'));
+	app.use(express.static("public"));
 	
 	// Passport Session Configuration
 	app.use(sessionConfig);
@@ -587,15 +587,15 @@
 	app.use(passport.session());
 	
 	// Routes
-	app.use('/register', registerRouter);
-	app.use('/user', userRouter);
+	app.use("/auth", authRouter);
+	app.use("/user", userRouter);
 	
 	// Catch all bucket, must be last!
-	app.use('/', indexRouter);
+	app.use("/", indexRouter);
 	
 	// Listen //
 	app.listen(port, function () {
-	   console.log('Listening on port:', port);
+	  console.log("Listening on port:", port);
 	});
 
 /***/ }),
@@ -827,36 +827,6 @@
 	const passport = __webpack_require__(5);
 	const path = __webpack_require__(14);
 	
-	router.post("/", (req, res, next) => {
-	  console.log("post /register route");
-	  /*
-	  username: {type: String, required: true, index: {unique: true}},
-	  password: {type: String, required: true},
-	  recipes: {type: Array}
-	  */
-	  const userToSave = {
-	    username: req.body.username,
-	    password: req.body.password
-	  };
-	
-	  console.log("userToSave", userToSave);
-	
-	  Users.create(userToSave, (err, post) => {
-	    console.log("post /register -- User.create");
-	    if (err) {
-	      console.log("post /register -- User.create -- failure");
-	      res.sendStatus(500);
-	    } else {
-	      console.log("post /register -- User.create -- success");
-	      res.sendStatus(201);
-	    }
-	  });
-	});
-	
-	router.put("/", passport.authenticate("local"), function (req, res) {
-	  res.status(200).send(req.user.username);
-	});
-	
 	router.get("*", (req, res) => {
 	  res.sendFile(path.join(__dirname, "/../public/index.html"));
 	});
@@ -892,7 +862,7 @@
 	// clear all server session information about this user
 	router.get("/logout", (req, res) => {
 	  // Use passport's built-in method to log out the user
-	  console.log("Logged out");
+	  console.log("user logged out");
 	  req.logOut();
 	  res.sendStatus(200);
 	});
@@ -911,11 +881,53 @@
 	
 	const express = __webpack_require__(2);
 	const router = express.Router();
-	const Users = __webpack_require__(7);
+	const passport = __webpack_require__(5);
 	const path = __webpack_require__(14);
+	const Users = __webpack_require__(7);
 	
-	// Handles POST request with new user data
+	// register
+	router.post("/", (req, res, next) => {
+	  console.log("post /register route");
+	  /*
+	  username: {type: String, required: true, index: {unique: true}},
+	  password: {type: String, required: true},
+	  recipes: {type: Array}
+	  */
+	  const userToSave = {
+	    username: req.body.username,
+	    password: req.body.password
+	  };
 	
+	  console.log("userToSave", userToSave);
+	
+	  Users.create(userToSave, (err, post) => {
+	    console.log("post /register -- User.create");
+	    if (err) {
+	      console.log("post /register -- User.create -- failure");
+	      res.sendStatus(500);
+	    } else {
+	      console.log("post /register -- User.create -- success");
+	      res.sendStatus(201);
+	    }
+	  });
+	});
+	
+	// login
+	router.put("/", passport.authenticate("local"), function (req, res) {
+	  res.status(200).send(req.user.username);
+	});
+	
+	// authenticate
+	router.get("/", (req, res) => {
+	  console.log("authenticate route hit");
+	  if (req.isAuthenticated()) {
+	    console.log("user is authenticated");
+	    res.sendStatus(200);
+	  } else {
+	    console.log("user not authenticated");
+	    res.sendStatus(401);
+	  }
+	});
 	
 	router.get("*", (req, res) => {
 	  res.sendFile(path.join(__dirname, "/../public/index.html"));
