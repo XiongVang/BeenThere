@@ -1,15 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Route, Redirect, Link } from "react-router-dom";
+import { Route, Redirect } from "react-router-dom";
 
 // actions
 import { authenticate, logout } from "../auth/auth.actions.jsx";
 
 // components
-import Logo from "./nav/logo.component.jsx";
-import SideNav from "./nav/sideNav.component.jsx";
-import Details from "./details/details.component.jsx";
+import HomeHeader from "./home-header/home_header.component.jsx";
+import HomeMain from "./home-main/home_main.container.jsx";
 import Footer from "../auth/footer/footer.component.jsx";
 
 class HomeContainer extends Component {
@@ -25,13 +24,8 @@ class HomeContainer extends Component {
     const { isAuthenticated, logout } = this.props;
     return isAuthenticated ? (
       <div className="user-home-page">
-        <header>
-          <Logo />
-          <SideNav handleLogout={logout} />
-        </header>
-        <main>
-          <Details />
-        </main>
+        <HomeHeader handleLogout={logout} />
+        <HomeMain />
         <Footer />
       </div>
     ) : (

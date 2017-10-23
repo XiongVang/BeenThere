@@ -38,12 +38,9 @@ router.put("/", passport.authenticate("local"), function(req, res) {
 
 // authenticate
 router.get("/", (req, res) => {
-  console.log("authenticate route hit");
   if (req.isAuthenticated()) {
-    console.log("user is authenticated");
     res.sendStatus(200);
   } else {
-    console.log("user not authenticated");
     res.sendStatus(401);
   }
 });

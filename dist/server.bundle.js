@@ -27,7 +27,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "247030998d2c635ccd67"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "f34e56be2490ccca3ee3"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -696,56 +696,75 @@
 /* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 	
-	var mongoose = __webpack_require__(8);
-	var Schema = mongoose.Schema;
-	var bcrypt = __webpack_require__(9);
-	var SALT_WORK_FACTOR = 10;
+	const mongoose = __webpack_require__(8);
+	const Schema = mongoose.Schema;
+	const bcrypt = __webpack_require__(9);
+	const SALT_WORK_FACTOR = 10;
 	
 	// Mongoose Schema
-	var UserSchema = new Schema({
-	    username: { type: String, required: true, index: { unique: true } },
-	    password: { type: String, required: true }
+	
+	/** postcard sub doc*/
+	const PostcardSchema = new Schema({
+	  title: { type: String, required: true },
+	  body: { type: String },
+	  date: { type: Date, required: true },
+	  location: { type: String }
+	});
+	
+	/** trip sub doc*/
+	const TripSchema = new Schema({
+	  name: { type: String, required: true },
+	  startDate: { type: Date, required: true },
+	  endDate: { type: Date, required: true },
+	  posts: [PostcardSchema]
+	});
+	
+	/** user collection */
+	const UserSchema = new Schema({
+	  username: { type: String, required: true, index: { unique: true } },
+	  password: { type: String, required: true },
+	  trips: [TripSchema]
 	});
 	
 	// Called before adding a new user to the DB. Encrypts password.
-	UserSchema.pre('save', function (next) {
-	    var user = this;
+	UserSchema.pre("save", function (next) {
+	  const user = this;
 	
-	    if (!user.isModified('password')) {
-	        return next();
+	  if (!user.isModified("password")) {
+	    return next();
+	  }
+	
+	  bcrypt.genSalt(SALT_WORK_FACTOR, function (err, salt) {
+	    if (err) {
+	      return next(err);
 	    }
 	
-	    bcrypt.genSalt(SALT_WORK_FACTOR, function (err, salt) {
-	        if (err) {
-	            return next(err);
-	        }
-	
-	        bcrypt.hash(user.password, salt, function (err, hash) {
-	            if (err) {
-	                return next(err);
-	            }
-	            //IF WE WERE TO CONSOLE LOG RIGHT MEOW, user.password would be 12345
-	            user.password = hash;
-	            next();
-	        });
+	    bcrypt.hash(user.password, salt, function (err, hash) {
+	      if (err) {
+	        return next(err);
+	      }
+	      //IF WE WERE TO CONSOLE LOG RIGHT MEOW, user.password would be 12345
+	      user.password = hash;
+	      next();
 	    });
+	  });
 	});
 	
 	// Used by login methods to compare login form password to DB password
 	UserSchema.methods.comparePassword = function (candidatePassword, callback) {
-	    // 'this' here refers to this instance of the User model
-	    bcrypt.compare(candidatePassword, this.password, function (err, isMatch) {
-	        if (err) {
-	            return callback(err);
-	        }
+	  // 'this' here refers to this instance of the User model
+	  bcrypt.compare(candidatePassword, this.password, function (err, isMatch) {
+	    if (err) {
+	      return callback(err);
+	    }
 	
-	        callback(null, isMatch);
-	    });
+	    callback(null, isMatch);
+	  });
 	};
 	
-	module.exports = mongoose.model('User', UserSchema);
+	module.exports = mongoose.model("User", UserSchema);
 
 /***/ }),
 /* 8 */
@@ -849,6 +868,17 @@
 	const router = express.Router();
 	const path = __webpack_require__(14);
 	
+	// authentication gateway
+	
+	router.use((req, res, next) => {
+	  console.log("user router hit");
+	  if (req.isUnauthenticated()) {
+	    res.sendStatus(401);
+	  } else {
+	    next();
+	  }
+	});
+	
 	// Handles Ajax request for user information
 	router.get("/", function (req, res) {
 	  console.log("GET /user -> req.isAuthenticated:", req.isAuthenticated());
@@ -919,12 +949,9 @@
 	
 	// authenticate
 	router.get("/", (req, res) => {
-	  console.log("authenticate route hit");
 	  if (req.isAuthenticated()) {
-	    console.log("user is authenticated");
 	    res.sendStatus(200);
 	  } else {
-	    console.log("user not authenticated");
 	    res.sendStatus(401);
 	  }
 	});

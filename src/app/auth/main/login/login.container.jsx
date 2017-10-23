@@ -6,7 +6,7 @@ import { Redirect } from "react-router-dom";
 // actions
 import { login, authenticate } from "../../auth.actions.jsx";
 
-import LoginForm from "./loginForm.component.jsx";
+import LoginForm from "./login_form.component.jsx";
 
 class LoginContainer extends Component {
   constructor(props) {

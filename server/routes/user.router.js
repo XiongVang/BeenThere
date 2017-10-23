@@ -2,6 +2,17 @@ const express = require("express");
 const router = express.Router();
 const path = require("path");
 
+// authentication gateway
+
+router.use((req, res, next) => {
+  console.log("user router hit");
+  if (req.isUnauthenticated()) {
+    res.sendStatus(401);
+  } else {
+    next();
+  }
+});
+
 // Handles Ajax request for user information
 router.get("/", function(req, res) {
   console.log("GET /user -> req.isAuthenticated:", req.isAuthenticated());

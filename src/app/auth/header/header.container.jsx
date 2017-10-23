@@ -3,8 +3,8 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
 // components
-import NotAuthNavBar from "./notAuthNavbar.component.jsx";
-import IsAuthNavBar from "./isAuthNavbar.component.jsx";
+import NotAuthNavBar from "./not_auth_navbar.component.jsx";
+import IsAuthNavBar from "./is_auth_navbar.component.jsx";
 
 // actions
 import { logout } from "../auth.actions.jsx";
