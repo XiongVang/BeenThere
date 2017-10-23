@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 const IsAuthNavbar = props => {
@@ -48,6 +49,10 @@ const IsAuthNavbar = props => {
       </ul>
     </div>
   );
+};
+
+IsAuthNavbar.propTypes = {
+  handleLogout: PropTypes.func.isRequired
 };
 
 export default IsAuthNavbar;

@@ -1,9 +1,3 @@
-/* Customize */
-.add-trip-fab {
-  padding-right: 10px;
-  padding-top: 10px;
-}
-
 /** MATERIAL ICONS **/
 /* fallback */
 @font-face {
@@ -58,9 +52,8 @@ main {
 
 /* support for fixed side nav */
 .user-home-page {
-  padding-left: 300px;
+  padding-left: 200px;
 }
-
 @media only screen and (max-width: 992px) {
   .user-home-page {
     padding-left: 0;

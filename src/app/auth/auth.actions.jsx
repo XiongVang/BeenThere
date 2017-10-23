@@ -23,8 +23,7 @@ export function logout() {
 }
 
 export function login(user) {
-  console.log("action.login -> user:", user);
-  const request = axios.post("/", user);
+  const request = axios.put("/", user);
 
   return {
     type: USER_LOGIN,
@@ -33,7 +32,7 @@ export function login(user) {
 }
 
 export function register(user) {
-  let request = axios.post("/register", user);
+  let request = axios.post("/", user);
 
   return {
     type: REGISTER_USER,

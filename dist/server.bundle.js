@@ -27,7 +27,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "db5f73c793b9bd43ec11"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "c3d69174907263c16b8b"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -827,7 +827,33 @@
 	const passport = __webpack_require__(5);
 	const path = __webpack_require__(14);
 	
-	router.post("/", passport.authenticate("local"), function (req, res) {
+	router.post("/", (req, res, next) => {
+	  console.log("post /register route");
+	  /*
+	  username: {type: String, required: true, index: {unique: true}},
+	  password: {type: String, required: true},
+	  recipes: {type: Array}
+	  */
+	  const userToSave = {
+	    username: req.body.username,
+	    password: req.body.password
+	  };
+	
+	  console.log("userToSave", userToSave);
+	
+	  Users.create(userToSave, (err, post) => {
+	    console.log("post /register -- User.create");
+	    if (err) {
+	      console.log("post /register -- User.create -- failure");
+	      res.sendStatus(500);
+	    } else {
+	      console.log("post /register -- User.create -- success");
+	      res.sendStatus(201);
+	    }
+	  });
+	});
+	
+	router.put("/", passport.authenticate("local"), function (req, res) {
 	  res.status(200).send(req.user.username);
 	});
 	
@@ -889,31 +915,7 @@
 	const path = __webpack_require__(14);
 	
 	// Handles POST request with new user data
-	router.post("/", (req, res, next) => {
-	  console.log("post /register route");
-	  /*
-	  username: {type: String, required: true, index: {unique: true}},
-	  password: {type: String, required: true},
-	  recipes: {type: Array}
-	  */
-	  const userToSave = {
-	    username: req.body.username,
-	    password: req.body.password
-	  };
 	
-	  console.log("userToSave", userToSave);
-	
-	  Users.create(userToSave, (err, post) => {
-	    console.log("post /register -- User.create");
-	    if (err) {
-	      console.log("post /register -- User.create -- failure");
-	      res.sendStatus(500);
-	    } else {
-	      console.log("post /register -- User.create -- success");
-	      res.sendStatus(201);
-	    }
-	  });
-	});
 	
 	router.get("*", (req, res) => {
 	  res.sendFile(path.join(__dirname, "/../public/index.html"));

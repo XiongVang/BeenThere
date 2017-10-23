@@ -28,7 +28,7 @@ $(document).ready(function() {
   // activates side nav on user home page
   $(document).on("click", ".home-side-nav-trigger", function(event) {
     $(this).sideNav({
-      menuWidth: 300, // Default is 300
+      menuWidth: 200, // Default is 300
       edge: "left", // Choose the horizontal origin
       closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
       draggable: true // Choose whether you can drag to open on touch screens,
