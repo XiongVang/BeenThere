@@ -27,7 +27,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "c3d69174907263c16b8b"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "a2072124e21750d2656d"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -568,7 +568,7 @@
 	// Route includes
 	const indexRouter = __webpack_require__(13);
 	const userRouter = __webpack_require__(15);
-	const registerRouter = __webpack_require__(16);
+	const registerRouter = __webpack_require__(19);
 	
 	const port = process.env.PORT || 3000;
 	
@@ -904,26 +904,7 @@
 	module.exports = router;
 
 /***/ }),
-/* 16 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	const express = __webpack_require__(2);
-	const router = express.Router();
-	const Users = __webpack_require__(7);
-	const path = __webpack_require__(14);
-	
-	// Handles POST request with new user data
-	
-	
-	router.get("*", (req, res) => {
-	  res.sendFile(path.join(__dirname, "/../public/index.html"));
-	});
-	
-	module.exports = router;
-
-/***/ }),
+/* 16 */,
 /* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -997,6 +978,26 @@
 		}
 	};
 
+
+/***/ }),
+/* 19 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	const express = __webpack_require__(2);
+	const router = express.Router();
+	const Users = __webpack_require__(7);
+	const path = __webpack_require__(14);
+	
+	// Handles POST request with new user data
+	
+	
+	router.get("*", (req, res) => {
+	  res.sendFile(path.join(__dirname, "/../public/index.html"));
+	});
+	
+	module.exports = router;
 
 /***/ })
 /******/ ])));

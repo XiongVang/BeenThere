@@ -1,7 +1,7 @@
 .DS_STORE
-dist
+/dist
 node_modules/
-bundle.js
+*.bundle.js
 npm-debug.log
 .idea/
 *.log
