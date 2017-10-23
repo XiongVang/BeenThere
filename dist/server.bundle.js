@@ -27,11 +27,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-<<<<<<< HEAD
-/******/ 	var hotCurrentHash = "a2072124e21750d2656d"; // eslint-disable-line no-unused-vars
-=======
 /******/ 	var hotCurrentHash = "f34e56be2490ccca3ee3"; // eslint-disable-line no-unused-vars
->>>>>>> refactor-server-routes
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -572,11 +568,7 @@
 	// Route includes
 	const indexRouter = __webpack_require__(13);
 	const userRouter = __webpack_require__(15);
-<<<<<<< HEAD
-	const registerRouter = __webpack_require__(19);
-=======
 	const authRouter = __webpack_require__(16);
->>>>>>> refactor-server-routes
 	
 	const port = process.env.PORT || 3000;
 	
@@ -912,9 +904,6 @@
 	module.exports = router;
 
 /***/ }),
-<<<<<<< HEAD
-/* 16 */,
-=======
 /* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -974,7 +963,6 @@
 	module.exports = router;
 
 /***/ }),
->>>>>>> refactor-server-routes
 /* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1048,26 +1036,6 @@
 		}
 	};
 
-
-/***/ }),
-/* 19 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	const express = __webpack_require__(2);
-	const router = express.Router();
-	const Users = __webpack_require__(7);
-	const path = __webpack_require__(14);
-	
-	// Handles POST request with new user data
-	
-	
-	router.get("*", (req, res) => {
-	  res.sendFile(path.join(__dirname, "/../public/index.html"));
-	});
-	
-	module.exports = router;
 
 /***/ })
 /******/ ])));

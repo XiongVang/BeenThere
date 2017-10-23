@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 
 const SideNav = props => {
   const side_nav_styles = {
@@ -48,9 +48,12 @@ const SideNav = props => {
       {/* add new trip */}
       <li>
         <div style={add_trip_fab_styles}>
-          <button className="right btn-flat waves-effect waves-light">
+          <Link
+            to="home/addTrip"
+            className="right btn-flat waves-effect waves-light"
+          >
             <i className="large material-icons center">add_circle</i>
-          </button>
+          </Link>
         </div>
       </li>
 
@@ -87,4 +90,5 @@ const SideNav = props => {
 SideNav.propTypes = {
   handleLogout: PropTypes.func.isRequired
 };
+
 export default SideNav;

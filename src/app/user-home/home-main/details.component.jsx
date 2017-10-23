@@ -1,5 +1,5 @@
 import React from "react";
-import ReactFilestack from "filestack-react";
+import { Link } from "react-router-dom";
 import { Card, CardTitle } from "react-materialize";
 
 const Details = props => {
@@ -9,39 +9,10 @@ const Details = props => {
 
       {/* add post fab */}
       <div className="fixed-action-btn">
-        <a className="btn-floating btn-large cyan">
+        <Link to="home/addPostcard" className="btn-floating btn-large cyan">
           <i className="large material-icons">add</i>
-        </a>
+        </Link>
       </div>
-
-      {/* filestack upload */}
-      <ReactFilestack
-        apikey="AEdmA9b3IRtDdvGXicdxAz"
-        buttonText="Add picture"
-        buttonClass="btn"
-        onSuccess={result => {
-          console.log("FileStack success -->", result);
-        }}
-        onError={error => {
-          console.log("FileStack error -->", error);
-        }}
-        options={{
-          accept: "image/*",
-          fromSources: [
-            "local_file_system",
-            "webcam",
-            "url",
-            "imagesearch",
-            "facebook",
-            "instagram",
-            "flickr"
-          ],
-          maxFiles: 1,
-          minFiles: 1,
-          imageDim: [800, 600],
-          storeTo: { access: "public" }
-        }}
-      />
 
       {/* post cards */}
       <div className="section row">

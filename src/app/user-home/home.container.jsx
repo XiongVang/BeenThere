@@ -22,10 +22,11 @@ class HomeContainer extends Component {
 
   render() {
     const { isAuthenticated, logout } = this.props;
+    const path = this.props.match.path;
     return isAuthenticated ? (
       <div className="user-home-page">
         <HomeHeader handleLogout={logout} />
-        <HomeMain />
+        <HomeMain path={path}/>
         <Footer />
       </div>
     ) : (
