@@ -1,6 +1,8 @@
 .DS_STORE
-dist/
+dist/server.bundle.js
+dist/server.bundle.js.map
 node_modules/
+dist/
 *.bundle.js
 npm-debug.log
 .idea/
