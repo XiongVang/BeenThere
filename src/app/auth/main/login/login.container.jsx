@@ -28,8 +28,13 @@ class LoginContainer extends Component {
     const { isAuthenticated } = this.props;
 
     return (
-      <div className=" container center-align">
-        <div className=" card ">
+      <div className="section container center-align">
+        <div className="section card ">
+          <div className="section">
+            <span className="card-title">Login</span>
+            <p>Please enter username and password below:</p>
+          </div>
+          <div className="divider" />
           {isAuthenticated ? (
             <Redirect to="/home" />
           ) : (

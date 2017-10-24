@@ -6,7 +6,7 @@ const Logo = () => {
     <nav className="teal">
       <div className="container">
         <div className="nav-wrapper">
-          <Link id="logo-container" to="/" className="brand-logo">
+          <Link to="/" className="brand-logo">
             BeenThere
           </Link>
           <a

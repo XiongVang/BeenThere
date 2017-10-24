@@ -7,11 +7,15 @@ import NotAuthNavBar from "./not_auth_navbar.component.jsx";
 import IsAuthNavBar from "./is_auth_navbar.component.jsx";
 
 // actions
-import { logout } from "../auth.actions.jsx";
+import { logout, authenticate } from "../auth.actions.jsx";
 
 class HeaderContainer extends Component {
   constructor(props) {
     super(props);
+  }
+
+  componentDidMount() {
+    this.props.authenticate();
   }
   render() {
     const { logout, isAuthenticated } = this.props;
@@ -36,7 +40,7 @@ function mapStateToProps(store) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ logout }, dispatch);
+  return bindActionCreators({ logout, authenticate }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(HeaderContainer);

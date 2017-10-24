@@ -34,8 +34,13 @@ class RegisterContainer extends Component {
     return isRegistered || isAuthenticated ? (
       <Redirect to="/login" />
     ) : (
-      <div className=" container center-align">
-        <div className=" card ">
+      <div className="section container center-align">
+        <div className="section card ">
+          <div className="section">
+            <span className="card-title">Register</span>
+            <p>Please choose a username and password:</p>
+          </div>
+          <div className="divider" />
           <RegisterForm onSubmit={this.handleSubmit} />
         </div>
       </div>
