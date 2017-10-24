@@ -27,7 +27,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "f34e56be2490ccca3ee3"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "76d4c43df7642309533f"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -715,7 +715,7 @@
 	
 	/** trip sub doc*/
 	const TripSchema = new Schema({
-	  name: { type: String, required: true },
+	  title: { type: String, required: true },
 	  startDate: { type: Date, required: true },
 	  endDate: { type: Date, required: true },
 	  posts: [PostcardSchema]
@@ -867,9 +867,9 @@
 	const express = __webpack_require__(2);
 	const router = express.Router();
 	const path = __webpack_require__(14);
+	const User = __webpack_require__(7);
 	
 	// authentication gateway
-	
 	router.use((req, res, next) => {
 	  console.log("user router hit");
 	  if (req.isUnauthenticated()) {
@@ -879,14 +879,20 @@
 	  }
 	});
 	
-	// Handles Ajax request for user information
+	// return user object including trips and postcards
 	router.get("/", function (req, res) {
-	  console.log("GET /user -> req.isAuthenticated:", req.isAuthenticated());
-	  if (!req.isAuthenticated()) {
-	    res.sendStatus(401);
-	  } else {
-	    res.send(req.user);
-	  }
+	  User.findOne({ _id: req.user._id }, { trips: 1, _id: 0 }, (err, result) => {
+	    if (err) {
+	      console.error("/user GET error:", err);
+	      res.sendStatus(500);
+	    } else {
+	      console.log("wtf?");
+	      delete result._id;
+	      delete result.password;
+	      console.log("/user GET result:", result);
+	      res.send(result);
+	    }
+	  });
 	});
 	
 	// clear all server session information about this user
@@ -895,6 +901,18 @@
 	  console.log("user logged out");
 	  req.logOut();
 	  res.sendStatus(200);
+	});
+	
+	// create a new trip
+	router.post("/create/trip", (req, res) => {
+	  User.updateOne({ _id: req.user._id }, { $push: { trips: req.body } }, { upsert: true }, err => {
+	    if (err) {
+	      console.error("/user/create/trip POST error:", err);
+	      res.sendStatus(500);
+	    } else {
+	      res.sendStatus(201);
+	    }
+	  });
 	});
 	
 	router.get("*", (req, res) => {
@@ -918,11 +936,6 @@
 	// register
 	router.post("/", (req, res, next) => {
 	  console.log("post /register route");
-	  /*
-	  username: {type: String, required: true, index: {unique: true}},
-	  password: {type: String, required: true},
-	  recipes: {type: Array}
-	  */
 	  const userToSave = {
 	    username: req.body.username,
 	    password: req.body.password
@@ -930,6 +943,10 @@
 	
 	  console.log("userToSave", userToSave);
 	
+	  /*
+	  username: {type: String, required: true, index: {unique: true}}
+	  password: {type: String, required: true}
+	  */
 	  Users.create(userToSave, (err, post) => {
 	    console.log("post /register -- User.create");
 	    if (err) {
@@ -949,6 +966,7 @@
 	
 	// authenticate
 	router.get("/", (req, res) => {
+	  console.log("/auth GET hit!!!");
 	  if (req.isAuthenticated()) {
 	    res.sendStatus(200);
 	  } else {

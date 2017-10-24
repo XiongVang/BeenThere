@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 
 const SideNav = props => {
   const side_nav_styles = {
@@ -12,7 +12,7 @@ const SideNav = props => {
     paddingTop: 12
   };
 
-  const { handleLogout } = props;
+  const { handleCreateTripButton, handleLogout, username } = props;
   return (
     <ul
       style={side_nav_styles}
@@ -29,7 +29,7 @@ const SideNav = props => {
             <img className="circle" src="img/yuna.jpg" />
           </div>
           <div>
-            <span className="white-text name">{"<username>"}</span>
+            <span className="white-text name">{username}</span>
           </div>
         </div>
       </li>
@@ -48,12 +48,12 @@ const SideNav = props => {
       {/* add new trip */}
       <li>
         <div style={add_trip_fab_styles}>
-          <Link
-            to="home/addTrip"
+          <a
+            onClick={handleCreateTripButton}
             className="right btn-flat waves-effect waves-light"
           >
             <i className="large material-icons center">add_circle</i>
-          </Link>
+          </a>
         </div>
       </li>
 
@@ -88,7 +88,8 @@ const SideNav = props => {
 };
 
 SideNav.propTypes = {
-  handleLogout: PropTypes.func.isRequired
+  handleLogout: PropTypes.func.isRequired,
+  username: PropTypes.string
 };
 
 export default SideNav;

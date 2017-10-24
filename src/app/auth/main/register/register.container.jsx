@@ -4,32 +4,25 @@ import { bindActionCreators } from "redux";
 import { Route, Redirect } from "react-router-dom";
 
 // actions
-import { register, authenticate } from "../../auth.actions.jsx";
-import { setIsRegistered } from "../../auth_util.actions.jsx";
+import { register, authenticate } from "../../auth.action.jsx";
+import { setIsRegistered } from "../../auth_utils.action.jsx";
 
 import RegisterForm from "./register_form.component.jsx";
 
 class RegisterContainer extends Component {
   constructor(props) {
     super(props);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
     this.props.authenticate();
-    console.log("RegisterContainer -> props:", this.props);
   }
-
-  handleSubmit(values) {
-    this.props.register(values);
-  }
-
   componentWillUnmount() {
     this.props.setIsRegistered(false);
   }
 
   render() {
-    const { isRegistered, isAuthenticated } = this.props;
+    const { isRegistered, isAuthenticated, register } = this.props;
 
     return isRegistered || isAuthenticated ? (
       <Redirect to="/login" />
@@ -41,7 +34,7 @@ class RegisterContainer extends Component {
             <p>Please choose a username and password:</p>
           </div>
           <div className="divider" />
-          <RegisterForm onSubmit={this.handleSubmit} />
+          <RegisterForm onSubmit={register} />
         </div>
       </div>
     );

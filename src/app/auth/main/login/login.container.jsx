@@ -4,30 +4,25 @@ import { bindActionCreators } from "redux";
 import { Redirect } from "react-router-dom";
 
 // actions
-import { login, authenticate } from "../../auth.actions.jsx";
+import { login, authenticate } from "../../auth.action.jsx";
 
 import LoginForm from "./login_form.component.jsx";
 
 class LoginContainer extends Component {
   constructor(props) {
     super(props);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    console.log("LoginContainer -> props:", props);
   }
 
   componentWillMount() {
     this.props.authenticate();
-    console.log("LoginContainer -> props:", this.props);
-  }
-
-  handleSubmit(values) {
-    this.props.login(values);
   }
 
   render() {
-    const { isAuthenticated } = this.props;
+    const { isAuthenticated, login } = this.props;
 
-    return (
+    return isAuthenticated ? (
+      <Redirect to="/home" />
+    ) : (
       <div className="section container center-align">
         <div className="section card ">
           <div className="section">
@@ -35,11 +30,7 @@ class LoginContainer extends Component {
             <p>Please enter username and password below:</p>
           </div>
           <div className="divider" />
-          {isAuthenticated ? (
-            <Redirect to="/home" />
-          ) : (
-            <LoginForm onSubmit={this.handleSubmit} />
-          )}
+          <LoginForm onSubmit={login} />
         </div>
       </div>
     );

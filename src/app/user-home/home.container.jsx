@@ -4,10 +4,10 @@ import { bindActionCreators } from "redux";
 import { Route, Redirect } from "react-router-dom";
 
 // actions
-import { authenticate, logout } from "../auth/auth.actions.jsx";
+import { authenticate, logout } from "../auth/auth.action.jsx";
 
 // components
-import HomeHeader from "./home-header/home_header.component.jsx";
+import HomeHeader from "./home-header/home_header.container.jsx";
 import HomeMain from "./home-main/home_main.container.jsx";
 import Footer from "../auth/footer/footer.component.jsx";
 
@@ -25,8 +25,8 @@ class HomeContainer extends Component {
     const path = this.props.match.path;
     return isAuthenticated ? (
       <div className="user-home-page">
-        <HomeHeader handleLogout={logout} />
-        <HomeMain path={path}/>
+        <HomeHeader />
+        <HomeMain path={path} />
         <Footer />
       </div>
     ) : (

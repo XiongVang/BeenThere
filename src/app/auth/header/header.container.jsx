@@ -7,7 +7,7 @@ import NotAuthNavBar from "./not_auth_navbar.component.jsx";
 import IsAuthNavBar from "./is_auth_navbar.component.jsx";
 
 // actions
-import { logout, authenticate } from "../auth.actions.jsx";
+import { logout, authenticate } from "../auth.action.jsx";
 
 class HeaderContainer extends Component {
   constructor(props) {

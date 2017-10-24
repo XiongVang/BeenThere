@@ -2,9 +2,10 @@ import React from "react";
 import { Field, reduxForm } from "redux-form";
 
 const Form = props => {
+  const { handleSubmit } = props;
   return (
-    <div className="section center-align">
-      <form onSubmit={props.handleSubmit} className="container col s3">
+    <div className="section">
+      <form onSubmit={handleSubmit} className="center-align container col s6">
         <div className="input-field col s3">
           <Field
             className="validate"
@@ -38,7 +39,6 @@ const Form = props => {
     </div>
   );
 };
-
 const LoginForm = reduxForm({
   // a unique name for the form
   form: "login"

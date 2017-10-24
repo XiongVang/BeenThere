@@ -1,7 +1,7 @@
 import React from "react";
 import ReactFilestack from "filestack-react";
 
-const AddPostcard = props => {
+const CreatePostcard = props => {
   const fileStackOptions = {
     accept: "image/*",
     fromSources: [
@@ -40,4 +40,4 @@ const AddPostcard = props => {
   );
 };
 
-export default AddPostcard;
+export default CreatePostcard;

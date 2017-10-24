@@ -7,11 +7,6 @@ const Users = require("../models/user.model");
 // register
 router.post("/", (req, res, next) => {
   console.log("post /register route");
-  /*
-  username: {type: String, required: true, index: {unique: true}},
-  password: {type: String, required: true},
-  recipes: {type: Array}
-  */
   const userToSave = {
     username: req.body.username,
     password: req.body.password
@@ -19,6 +14,10 @@ router.post("/", (req, res, next) => {
 
   console.log("userToSave", userToSave);
 
+  /*
+  username: {type: String, required: true, index: {unique: true}}
+  password: {type: String, required: true}
+  */
   Users.create(userToSave, (err, post) => {
     console.log("post /register -- User.create");
     if (err) {
@@ -38,6 +37,7 @@ router.put("/", passport.authenticate("local"), function(req, res) {
 
 // authenticate
 router.get("/", (req, res) => {
+  console.log("/auth GET hit!!!");
   if (req.isAuthenticated()) {
     res.sendStatus(200);
   } else {

@@ -2,21 +2,25 @@ import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
 
 // components
-import Details from "./details/details.container.jsx";
-import AddTrip from "./add-trip/add_trip.container.jsx";
-import AddPostcard from "./add-postcard/add_postcard.container.jsx";
+import TripDetails from "./trip-details/trip_details.container.jsx";
+import CreateTrip from "./create-trip/create_trip.container.jsx";
+import CreatePostcard from "./create-postcard/create_postcard.container.jsx";
 
 const HomeMain = props => {
   return (
     <main>
       <Switch>
-        <Route exact path={`${props.path}/addTrip`} component={AddTrip} />
         <Route
           exact
-          path={`${props.path}/addPostcard`}
-          component={AddPostcard}
+          path={`${props.path}/create/trip`}
+          component={CreateTrip}
         />
-        <Route exact path={props.path} component={Details} />
+        <Route
+          exact
+          path={`${props.path}/create/postcard`}
+          component={CreatePostcard}
+        />
+        <Route path="*" component={TripDetails} />
       </Switch>
     </main>
   );
