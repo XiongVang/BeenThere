@@ -4,9 +4,7 @@ import { updateObject } from "../utils.module.jsx";
 import { CREATE_TRIP } from "./home.action.jsx";
 import { SET_TRIP_CREATED } from "./home_utils.action.jsx";
 
-export default function(state = {tripCreated: false}, action) {
-  console.log("register.reducer action:", action);
-  console.log("register.reducer state:", state);
+export default (state = { tripCreated: false }, action) => {
 
   const tripHasBeenCreated = { tripCreated: true };
   const tripNotAdded = { tripCreated: false };
@@ -23,4 +21,4 @@ export default function(state = {tripCreated: false}, action) {
   }
 
   return state;
-}
+};

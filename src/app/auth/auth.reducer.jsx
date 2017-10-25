@@ -4,8 +4,6 @@ import { updateObject } from "../utils.module.jsx";
 import { AUTHENTICATION, USER_LOGIN, USER_LOGOUT } from "./auth.action.jsx";
 
 export default function(state = { isAuthenticated: false }, action) {
-  console.log("auth.reducer action:", action);
-  console.log("auth.reducer state:", state);
 
   const isAuth = { isAuthenticated: true };
   const notAuth = { isAuthenticated: false };

@@ -15,7 +15,7 @@ class CreateTrip extends Component {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.props.createTrip({
-      title: "this is a title2",
+      title: "this is a title5",
       startDate: new Date(),
       endDate: new Date()
     });

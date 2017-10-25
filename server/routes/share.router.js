@@ -10,7 +10,6 @@ router.get("/", (req, res) => {
       console.error("/share GET error:", error);
       res.sendStatus(500);
     } else {
-      console.log("/share GET result:", result);
       res.send(result);
     }
   });
@@ -24,9 +23,7 @@ router.get("/:id", (req, res) => {
       console.error("/share GET error:", error);
       res.sendStatus(500);
     } else {
-      let matchedTrip = utils.findMatchedTrip(id, result);
-
-      console.log("matchedTrip", matchedTrip);
+      let matchedTrip = utils.findTripById(id, result);
 
       if (!matchedTrip) {
         res.sendStatus(500);

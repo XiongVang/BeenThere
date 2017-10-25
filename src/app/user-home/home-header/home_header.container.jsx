@@ -9,25 +9,24 @@ import SideNav from "./side_nav.component.jsx";
 
 // actions
 import { logout } from "../../auth/auth.action.jsx";
-import { fetchUser } from "../home.action.jsx";
+import { fetchUser, setDetails } from "../home.action.jsx";
 
 class HomeHeader extends Component {
   constructor(props) {
     super(props);
-    this.handleCreateTripButton = this.handleCreateTripButton.bind(this);
-
-    console.log("HomeHeader props:", props);
+    this.handleCreateButton = this.handleCreateButton.bind(this);
   }
 
   componentDidMount() {
     this.props.fetchUser();
   }
 
-  handleCreateTripButton(event) {
-    console.log("!!! handleCreateTripButton !!!", this.props);
+  handleCreateButton(event) {
+    console.log("inside handleCreateTripButton");
     event.preventDefault();
     this.props.history.push("/home/create/trip");
   }
+
   render() {
     const { logout, user } = this.props;
     return (
@@ -36,7 +35,8 @@ class HomeHeader extends Component {
         <SideNav
           user={user}
           handleLogout={logout}
-          handleCreateTripButton={this.handleCreateTripButton}
+          handleCreateButton={this.handleCreateTripButton}
+          handleTitleClick={this.props.setDetails}
         />
       </header>
     );
@@ -48,7 +48,7 @@ function mapStateToProps(store) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchUser, logout }, dispatch);
+  return bindActionCreators({ fetchUser, logout, setDetails }, dispatch);
 }
 
 export default withRouter(
