@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export const CREATE_TRIP = "CREATE_TRIP";
+export const CREATE_POSTCARD = "CREATE_POSTCARD";
 export const FETCH_USER = "FETCH_USER";
 export const SET_DETAILS = "SET_DETAILS";
 
@@ -14,6 +15,19 @@ export function createTrip(trip) {
 
   return {
     type: CREATE_TRIP,
+    payload: request
+  };
+}
+
+// create new postcard
+export function createPostcard(tripId, postcard) {
+  let request = axios.post("/user/create/postcard", {
+    tripId: tripId,
+    postcard: postcard
+  });
+
+  return {
+    type: CREATE_POSTCARD,
     payload: request
   };
 }

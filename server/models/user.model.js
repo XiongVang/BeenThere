@@ -7,17 +7,17 @@ const SALT_WORK_FACTOR = 10;
 
 /** postcard sub doc*/
 const PostcardSchema = new Schema({
-  title: { type: String, required: true },
+  title: { type: String },
   body: { type: String },
-  date: { type: Date, required: true },
+  date: { type: Date },
   location: { type: String }
 });
 
 /** trip sub doc*/
 const TripSchema = new Schema({
-  title: { type: String, required: true },
-  startDate: { type: Date, required: true },
-  endDate: { type: Date, required: true },
+  title: { type: String },
+  startDate: { type: Date },
+  endDate: { type: Date },
   posts: [PostcardSchema]
 });
 

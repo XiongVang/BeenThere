@@ -12,7 +12,7 @@ class TripDetails extends Component {
   }
 
   handleFAB() {
-    // this.props.history.push("/home/create/postcard");
+    this.props.history.push("/home/create/postcard");
   }
 
   render() {

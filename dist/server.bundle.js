@@ -27,7 +27,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "374d853e7ac469bdb9a0"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "faf8532e5d640efb7216"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -709,17 +709,17 @@
 	
 	/** postcard sub doc*/
 	const PostcardSchema = new Schema({
-	  title: { type: String, required: true },
+	  title: { type: String },
 	  body: { type: String },
-	  date: { type: Date, required: true },
+	  date: { type: Date },
 	  location: { type: String }
 	});
 	
 	/** trip sub doc*/
 	const TripSchema = new Schema({
-	  title: { type: String, required: true },
-	  startDate: { type: Date, required: true },
-	  endDate: { type: Date, required: true },
+	  title: { type: String },
+	  startDate: { type: Date },
+	  endDate: { type: Date },
 	  posts: [PostcardSchema]
 	});
 	

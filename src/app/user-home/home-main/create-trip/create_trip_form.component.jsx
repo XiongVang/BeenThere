@@ -1,9 +1,15 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
 
+/**
+ * title: { type: String, required: true },
+ * startDate: { type: Date, required: true },
+ * endDate: { type: Date, required: true },
+ */
+
 const Form = props => {
   const { handleSubmit, onSubmit } = props;
-  console.log("!!!! handleSubmit !!!!!", handleSubmit);
+
   return (
     <div className="section center-align">
       <form onSubmit={handleSubmit(onSubmit)} className="container col s3">

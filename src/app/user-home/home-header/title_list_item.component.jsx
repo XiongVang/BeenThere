@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-export default class TitleListItem extends Component {
+class TitleListItem extends Component {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
@@ -20,3 +20,5 @@ export default class TitleListItem extends Component {
     );
   }
 }
+
+export default TitleListItem;

@@ -15,6 +15,7 @@ class HomeHeader extends Component {
   constructor(props) {
     super(props);
     this.handleCreateButton = this.handleCreateButton.bind(this);
+    this.handleTitleClick = this.handleTitleClick.bind(this);
   }
 
   componentDidMount() {
@@ -23,6 +24,11 @@ class HomeHeader extends Component {
 
   handleCreateButton(event) {
     this.props.history.push("/home/create/trip");
+  }
+
+  handleTitleClick(tripId) {
+    this.props.setDetails(tripId);
+    this.props.history.push("/home");
   }
 
   render() {
@@ -34,7 +40,7 @@ class HomeHeader extends Component {
           user={user}
           handleLogout={logout}
           handleCreateButton={this.handleCreateButton}
-          handleTitleClick={this.props.setDetails}
+          handleTitleClick={this.handleTitleClick}
         />
       </header>
     );

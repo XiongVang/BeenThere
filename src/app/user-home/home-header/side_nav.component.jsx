@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { withRouter, Link } from "react-router-dom";
 
 import TitleListItem from "./title_list_item.component.jsx";
 
