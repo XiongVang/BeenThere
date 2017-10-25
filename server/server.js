@@ -12,6 +12,7 @@ const db = require("./modules/db.config.js");
 const indexRouter = require("./routes/index.router");
 const userRouter = require("./routes/user.router");
 const authRouter = require("./routes/auth.router");
+const shareRouter = require("./routes/share.router");
 
 const port = process.env.PORT || 3000;
 
@@ -30,6 +31,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Routes
+app.use("/share", shareRouter);
 app.use("/auth", authRouter);
 app.use("/user", userRouter);
 

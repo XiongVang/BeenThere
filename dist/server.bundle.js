@@ -27,7 +27,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "76d4c43df7642309533f"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "bc4a1e39d39fd4554542"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -546,7 +546,7 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 	__webpack_require__(1);
-	module.exports = __webpack_require__(17);
+	module.exports = __webpack_require__(19);
 
 
 /***/ }),
@@ -569,6 +569,7 @@
 	const indexRouter = __webpack_require__(13);
 	const userRouter = __webpack_require__(15);
 	const authRouter = __webpack_require__(16);
+	const shareRouter = __webpack_require__(17);
 	
 	const port = process.env.PORT || 3000;
 	
@@ -587,6 +588,7 @@
 	app.use(passport.session());
 	
 	// Routes
+	app.use("/share", shareRouter);
 	app.use("/auth", authRouter);
 	app.use("/user", userRouter);
 	
@@ -879,17 +881,13 @@
 	  }
 	});
 	
-	// return user object including trips and postcards
-	router.get("/", function (req, res) {
-	  User.findOne({ _id: req.user._id }, { trips: 1, _id: 0 }, (err, result) => {
+	// return username and list of trips
+	router.get("/", (req, res) => {
+	  User.findOne({ _id: req.user._id }, { username: 1, trips: 1, _id: 0 }, (err, result) => {
 	    if (err) {
 	      console.error("/user GET error:", err);
 	      res.sendStatus(500);
 	    } else {
-	      console.log("wtf?");
-	      delete result._id;
-	      delete result.password;
-	      console.log("/user GET result:", result);
 	      res.send(result);
 	    }
 	  });
@@ -960,7 +958,7 @@
 	});
 	
 	// login
-	router.put("/", passport.authenticate("local"), function (req, res) {
+	router.put("/", passport.authenticate("local"), (req, res) => {
 	  res.status(200).send(req.user.username);
 	});
 	
@@ -982,6 +980,72 @@
 
 /***/ }),
 /* 17 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	const express = __webpack_require__(2);
+	const router = express.Router();
+	const path = __webpack_require__(14);
+	const Users = __webpack_require__(7);
+	const utils = __webpack_require__(18);
+	
+	router.get("/", (req, res) => {
+	  Users.find({}, { trips: 1, _id: 0 }, (err, result) => {
+	    if (err) {
+	      console.error("/share GET error:", error);
+	      res.sendStatus(500);
+	    } else {
+	      console.log("/share GET result:", result);
+	      res.send(result);
+	    }
+	  });
+	});
+	
+	router.get("/:id", (req, res) => {
+	  let id = req.params.id;
+	
+	  Users.find({}, { trips: 1, _id: 0 }, (err, result) => {
+	    if (err) {
+	      console.error("/share GET error:", error);
+	      res.sendStatus(500);
+	    } else {
+	      let matchedTrip = utils.findMatchedTrip(id, result);
+	
+	      console.log("matchedTrip", matchedTrip);
+	
+	      if (!matchedTrip) {
+	        res.sendStatus(500);
+	      } else {
+	        res.send(matchedTrip);
+	      }
+	    }
+	  });
+	});
+	
+	module.exports = router;
+
+/***/ }),
+/* 18 */
+/***/ (function(module, exports) {
+
+	"use strict";
+	
+	module.exports = {
+	  findMatchedTrip: function findMatchedTrip(id, arrayOfTripsObject) {
+	    for (let i = 0; i < arrayOfTripsObject.length; i++) {
+	      let trips = arrayOfTripsObject[i].trips;
+	      for (let j = 0; j < trips.length; j++) {
+	        if (trips[j]._id == id) {
+	          return trips[j];
+	        }
+	      }
+	    }
+	  }
+	};
+
+/***/ }),
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(__resourceQuery) {/*
@@ -1012,7 +1076,7 @@
 						if(fromUpdate) console.log("[HMR] Update applied.");
 						return;
 					}
-					__webpack_require__(18)(updatedModules, updatedModules);
+					__webpack_require__(20)(updatedModules, updatedModules);
 					checkForUpdate(true);
 				});
 			}
@@ -1025,7 +1089,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, "?1000"))
 
 /***/ }),
-/* 18 */
+/* 20 */
 /***/ (function(module, exports) {
 
 	/*

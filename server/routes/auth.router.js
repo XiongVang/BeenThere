@@ -31,7 +31,7 @@ router.post("/", (req, res, next) => {
 });
 
 // login
-router.put("/", passport.authenticate("local"), function(req, res) {
+router.put("/", passport.authenticate("local"), (req, res) =>{
   res.status(200).send(req.user.username);
 });
 

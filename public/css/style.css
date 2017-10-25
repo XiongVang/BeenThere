@@ -1,3 +1,9 @@
+/** CUSTOMIZATION **/
+html {
+  min-width: 300px;
+  min-height: 500px;
+}
+
 /** MATERIAL ICONS **/
 /* fallback */
 @font-face {

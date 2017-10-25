@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const CREATE_TRIP = "CREATE_TRIP";
-export const GET_USER = "GET_USER";
+export const FETCH_USER = "FETCH_USER";
 
 /**
  * 
@@ -16,11 +16,11 @@ export function createTrip(trip) {
   };
 }
 
-export function getUser() {
+export function fetchUser() {
   let request = axios.get("/user");
 
   return {
-    type: GET_USER,
+    type: FETCH_USER,
     payload: request
   };
 }

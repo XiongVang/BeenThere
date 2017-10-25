@@ -12,7 +12,22 @@ const SideNav = props => {
     paddingTop: 12
   };
 
-  const { handleCreateTripButton, handleLogout, username } = props;
+  const { handleCreateTripButton, handleLogout, user } = props;
+
+  const tripTitles = user.trips ? (
+    user.trips.map(trip => {
+      return (
+        <li key={trip._id}>
+          <a className="waves-effect" href="#">
+            {trip.title}
+          </a>
+        </li>
+      );
+    })
+  ) : (
+    <div />
+  );
+
   return (
     <ul
       style={side_nav_styles}
@@ -29,7 +44,9 @@ const SideNav = props => {
             <img className="circle" src="img/yuna.jpg" />
           </div>
           <div>
-            <span className="white-text name">{username}</span>
+            <span className="white-text name">
+              {user.username ? user.username : "<username>"}
+            </span>
           </div>
         </div>
       </li>
@@ -63,33 +80,14 @@ const SideNav = props => {
       </li>
 
       {/* list of trips */}
-      <li>
-        <a className="waves-effect" href="#">
-          {"<trip title>"}
-        </a>
-      </li>
-      <li>
-        <a className="waves-effect" href="#">
-          {"<trip title>"}
-        </a>
-      </li>
-      <li>
-        <a className="waves-effect" href="#">
-          {"<trip title>"}
-        </a>
-      </li>
-      <li>
-        <a className="waves-effect" href="#">
-          {"<trip title>"}
-        </a>
-      </li>
+      {tripTitles}
     </ul>
   );
 };
 
 SideNav.propTypes = {
   handleLogout: PropTypes.func.isRequired,
-  username: PropTypes.string
+  user: PropTypes.object
 };
 
 export default SideNav;

@@ -9,12 +9,18 @@ import SideNav from "./side_nav.component.jsx";
 
 // actions
 import { logout } from "../../auth/auth.action.jsx";
+import { fetchUser } from "../home.action.jsx";
 
 class HomeHeader extends Component {
   constructor(props) {
     super(props);
-
     this.handleCreateTripButton = this.handleCreateTripButton.bind(this);
+
+    console.log("HomeHeader props:", props);
+  }
+
+  componentDidMount() {
+    this.props.fetchUser();
   }
 
   handleCreateTripButton(event) {
@@ -23,12 +29,12 @@ class HomeHeader extends Component {
     this.props.history.push("/home/create/trip");
   }
   render() {
-    const { logout, username } = this.props;
+    const { logout, user } = this.props;
     return (
       <header>
         <Logo />
         <SideNav
-          username={username}
+          user={user}
           handleLogout={logout}
           handleCreateTripButton={this.handleCreateTripButton}
         />
@@ -38,11 +44,11 @@ class HomeHeader extends Component {
 }
 
 function mapStateToProps(store) {
-  return { username: store.authReducer.username };
+  return { user: store.homeReducer.user };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ logout }, dispatch);
+  return bindActionCreators({ fetchUser, logout }, dispatch);
 }
 
 export default withRouter(

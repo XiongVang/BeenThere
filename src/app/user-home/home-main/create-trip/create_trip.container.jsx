@@ -7,7 +7,7 @@ import { Redirect } from "react-router-dom";
 import CreateTripForm from "./create_trip_form.component.jsx";
 
 // actions
-import { createTrip, getUser } from "../../home.action.jsx";
+import { createTrip, fetchUser } from "../../home.action.jsx";
 import { setTripCreated } from "../../home_utils.action.jsx";
 
 class CreateTrip extends Component {
@@ -15,14 +15,14 @@ class CreateTrip extends Component {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.props.createTrip({
-      title: "this is a title",
+      title: "this is a title2",
       startDate: new Date(),
       endDate: new Date()
     });
   }
 
   componentWillUnmount() {
-    this.props.getUser();
+    this.props.fetchUser();
     this.props.setTripCreated(false);
   }
 
@@ -54,6 +54,9 @@ function mapPropsToState(store) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ createTrip, getUser, setTripCreated }, dispatch);
+  return bindActionCreators(
+    { createTrip, fetchUser, setTripCreated },
+    dispatch
+  );
 }
 export default connect(mapPropsToState, mapDispatchToProps)(CreateTrip);

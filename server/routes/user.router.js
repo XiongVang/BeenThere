@@ -13,20 +13,20 @@ router.use((req, res, next) => {
   }
 });
 
-// return user object including trips and postcards
-router.get("/", function(req, res) {
-  User.findOne({ _id: req.user._id }, { trips: 1, _id: 0 }, (err, result) => {
-    if (err) {
-      console.error("/user GET error:", err);
-      res.sendStatus(500);
-    } else {
-      console.log("wtf?");
-      delete result._id;
-      delete result.password;
-      console.log("/user GET result:", result);
-      res.send(result);
+// return username and list of trips
+router.get("/", (req, res) => {
+  User.findOne(
+    { _id: req.user._id },
+    { username: 1, trips: 1, _id: 0 },
+    (err, result) => {
+      if (err) {
+        console.error("/user GET error:", err);
+        res.sendStatus(500);
+      } else {
+        res.send(result);
+      }
     }
-  });
+  );
 });
 
 // clear all server session information about this user
