@@ -13,12 +13,7 @@ import { setTripCreated } from "../../home_utils.action.jsx";
 class CreateTrip extends Component {
   constructor(props) {
     super(props);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.props.createTrip({
-      title: "this is a title5",
-      startDate: new Date(),
-      endDate: new Date()
-    });
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
   componentWillUnmount() {
@@ -26,7 +21,7 @@ class CreateTrip extends Component {
     this.props.setTripCreated(false);
   }
 
-  handleSubmit(values) {
+  onSubmit(values) {
     this.props.createTrip(values);
   }
 
@@ -42,7 +37,7 @@ class CreateTrip extends Component {
             <p>Create a new trip.</p>
           </div>
           <div className="divider" />
-          <CreateTripForm handleSubmit={this.handleSubmit} />
+          <CreateTripForm onSubmit={this.onSubmit} />
         </div>
       </div>
     );

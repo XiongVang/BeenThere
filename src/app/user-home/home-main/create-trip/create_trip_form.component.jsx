@@ -2,11 +2,11 @@ import React from "react";
 import { Field, reduxForm } from "redux-form";
 
 const Form = props => {
-  const { handleSubmit } = props;
+  const { handleSubmit, onSubmit } = props;
   console.log("!!!! handleSubmit !!!!!", handleSubmit);
   return (
     <div className="section center-align">
-      <form onSubmit={handleSubmit} className="container col s3">
+      <form onSubmit={handleSubmit(onSubmit)} className="container col s3">
         <div className="input-field col s3">
           <Field
             className="validate"

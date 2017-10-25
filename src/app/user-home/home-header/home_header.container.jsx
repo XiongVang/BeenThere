@@ -22,8 +22,6 @@ class HomeHeader extends Component {
   }
 
   handleCreateButton(event) {
-    console.log("inside handleCreateTripButton");
-    event.preventDefault();
     this.props.history.push("/home/create/trip");
   }
 
@@ -35,7 +33,7 @@ class HomeHeader extends Component {
         <SideNav
           user={user}
           handleLogout={logout}
-          handleCreateButton={this.handleCreateTripButton}
+          handleCreateButton={this.handleCreateButton}
           handleTitleClick={this.props.setDetails}
         />
       </header>
