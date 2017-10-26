@@ -4,11 +4,12 @@ import { updateObject } from "../utils.module.jsx";
 import { CREATE_TRIP, CREATE_POSTCARD } from "./home.action.jsx";
 import {
   SET_TRIP_CREATED,
-  SET_POSTCARD_CREATED
+  SET_POSTCARD_CREATED,
+  SET_IMAGE_UPLOADED
 } from "./home_utils.action.jsx";
 
 export default function(
-  state = { tripCreated: false, postcardCreated: false },
+  state = { tripCreated: false, postcardCreated: false, imageUploaded: false },
   action
 ) {
   if (action.type === CREATE_TRIP) {
@@ -29,6 +30,10 @@ export default function(
 
   if (action.type === SET_POSTCARD_CREATED) {
     return updateObject(state, { postcardCreated: action.payload });
+  }
+
+  if (action.type === SET_IMAGE_UPLOADED) {
+    return updateObject(state, { imageUploaded: action.payload });
   }
 
   return state;

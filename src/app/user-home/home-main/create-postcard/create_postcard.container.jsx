@@ -7,7 +7,10 @@ import ReactFilestack from "filestack-react";
 
 // actions
 import { createPostcard, fetchUser } from "../../home.action.jsx";
-import { setPostcardCreated } from "../../home_utils.action.jsx";
+import {
+  setPostcardCreated,
+  setImageUploaded
+} from "../../home_utils.action.jsx";
 
 //form
 import CreatePostcardForm from "./create_postcard_form.component.jsx";
@@ -15,61 +18,48 @@ import CreatePostcardForm from "./create_postcard_form.component.jsx";
 class CreatePostcard extends Component {
   constructor(props) {
     super(props);
+    this.state = { imageUrl: "" };
     this.onSubmit = this.onSubmit.bind(this);
-
-    console.log("CreatePostcard props:", props);
+    this.handleUploadSuccess = this.handleUploadSuccess.bind(this);
   }
 
   onSubmit(values) {
-    console.log("CreatePostcard onSubmit values:", values);
-    this.props.createPostcard(this.props.trip._id, values);
+    console.log("CreatePostcard onSubmit values:", Object.assign({}, values, { imageUrl: this.state.imageUrl }));
+
+    this.props.createPostcard(
+      this.props.trip._id,
+      Object.assign({}, values, { imageUrl: this.state.imageUrl })
+    );
+  }
+
+  handleUploadSuccess(response) {
+    console.log("handleUploadSuccess response:", response);
+    this.setState({ imageUrl: response.filesUploaded[0].url });
+    this.props.setImageUploaded(true);
+    console.log("CreatePostcard state:", this.state);
   }
 
   componentWillUnmount() {
     if (this.props.postcardCreated) {
       this.props.fetchUser();
       this.props.setPostcardCreated(false);
+      this.props.setImageUploaded(false);
     }
   }
 
   render() {
-    const fileStackOptions = {
-      accept: "image/*",
-      fromSources: [
-        "local_file_system",
-        "webcam",
-        "url",
-        "imagesearch",
-        "facebook",
-        "instagram",
-        "flickr"
-      ],
-      maxFiles: 1,
-      minFiles: 1,
-      imageDim: [800, 600],
-      storeTo: { access: "public" }
-    };
-
-    const { postcardCreated } = this.props;
+    const { postcardCreated, imageUploaded } = this.props;
 
     return postcardCreated ? (
       <Redirect to="/home" />
     ) : (
       <div className="section center-align">
-        {/* filestack upload */}
-        <ReactFilestack
-          apikey="AEdmA9b3IRtDdvGXicdxAz"
-          buttonText="Add picture"
-          buttonClass="btn"
-          onSuccess={result => {
-            console.log("FileStack success -->", result);
-          }}
-          onError={error => {
-            console.log("FileStack error -->", error);
-          }}
-          options={fileStackOptions}
+        <CreatePostcardForm
+          imageUploaded={imageUploaded}
+          handleUploadSuccess={this.handleUploadSuccess}
+          onSubmit={this.onSubmit}
+          imageUrl={this.state.imageUrl}
         />
-        <CreatePostcardForm onSubmit={this.onSubmit} />
       </div>
     );
   }
@@ -78,13 +68,14 @@ class CreatePostcard extends Component {
 function mapStateToProps(store) {
   return {
     trip: store.homeReducer.details,
-    postcardCreated: store.homeUtilsReducer.postcardCreated
+    postcardCreated: store.homeUtilsReducer.postcardCreated,
+    imageUploaded: store.homeUtilsReducer.imageUploaded
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(
-    { createPostcard, fetchUser, setPostcardCreated },
+    { createPostcard, fetchUser, setPostcardCreated, setImageUploaded },
     dispatch
   );
 }

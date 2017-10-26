@@ -27,7 +27,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "39541b8cea78df380b83"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "2a79a7764a2001ed13e5"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -709,6 +709,7 @@
 	
 	/** postcard sub doc*/
 	const PostcardSchema = new Schema({
+	  imageUrl: { type: String },
 	  title: { type: String },
 	  body: { type: String },
 	  date: { type: Date },
@@ -939,6 +940,8 @@
 	  let userId = req.user._id;
 	  let tripId = req.body.tripId;
 	  let postcard = req.body.postcard;
+	
+	  console.log("user.router POST /create/postcard req.body.postcard:", req.body.postcard);
 	
 	  User.findById(userId, (findError, user) => {
 	    if (findError) {

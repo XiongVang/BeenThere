@@ -21,6 +21,7 @@ export function createTrip(trip) {
 
 // create new postcard
 export function createPostcard(tripId, postcard) {
+  console.log("home.action createPostcard postcard:", postcard);
   let request = axios.post("/user/create/postcard", {
     tripId: tripId,
     postcard: postcard

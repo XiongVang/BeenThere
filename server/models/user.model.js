@@ -7,6 +7,7 @@ const SALT_WORK_FACTOR = 10;
 
 /** postcard sub doc*/
 const PostcardSchema = new Schema({
+  imageUrl: { type: String },
   title: { type: String },
   body: { type: String },
   date: { type: Date },

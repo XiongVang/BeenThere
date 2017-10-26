@@ -71,6 +71,11 @@ router.post("/create/postcard/", (req, res) => {
   let tripId = req.body.tripId;
   let postcard = req.body.postcard;
 
+  console.log(
+    "user.router POST /create/postcard req.body.postcard:",
+    req.body.postcard
+  );
+
   User.findById(userId, (findError, user) => {
     if (findError) {
       console.log("/create/postcard/ POST findError:", findError);
