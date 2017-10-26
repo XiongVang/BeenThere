@@ -18,7 +18,7 @@ const TripSchema = new Schema({
   title: { type: String },
   startDate: { type: Date },
   endDate: { type: Date },
-  posts: [PostcardSchema]
+  postcards: [PostcardSchema]
 });
 
 /** user collection */

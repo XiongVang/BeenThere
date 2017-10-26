@@ -17,8 +17,10 @@ class CreateTrip extends Component {
   }
 
   componentWillUnmount() {
-    this.props.fetchUser();
-    this.props.setTripCreated(false);
+    if (this.props.tripCreated) {
+      this.props.fetchUser();
+      this.props.setTripCreated(false);
+    }
   }
 
   onSubmit(values) {

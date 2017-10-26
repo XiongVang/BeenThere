@@ -26,8 +26,10 @@ class CreatePostcard extends Component {
   }
 
   componentWillUnmount() {
-    this.props.fetchUser();
-    this.props.setPostcardCreated(false);
+    if (this.props.postcardCreated) {
+      this.props.fetchUser();
+      this.props.setPostcardCreated(false);
+    }
   }
 
   render() {

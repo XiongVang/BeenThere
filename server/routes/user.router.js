@@ -16,7 +16,7 @@ router.use((req, res, next) => {
 // return username and list of trips
 router.get("/", (req, res) => {
   let query = { _id: req.user._id };
-  let fieldsToReturn = { username: 1, trips: 1, _id: 0 };
+  let fieldsToReturn = "username trips";
 
   User.findOne(query, fieldsToReturn, (error, result) => {
     if (error) {
@@ -61,25 +61,33 @@ router.post("/create/trip", (req, res) => {
 
 // create new postcard for given trip id param
 /**
- * title: { type: String, required: true },
+ * title: { type: String },
  * body: { type: String },
- * date: { type: Date, required: true },
+ * date: { type: Date },
  * location: { type: String }
  */
-router.post("/create/postcard/:id", (req, res) => {
+router.post("/create/postcard/", (req, res) => {
   let userId = req.user._id;
-  let tripId = req.params.id;
-  let postcard = req.body;
+  let tripId = req.body.tripId;
+  let postcard = req.body.postcard;
 
-  let filter = { _id: userId, trips: { _id: tripId } };
-  let update = { $push: { postcards } };
-
-  User.updateOne(filter, update, (error, result) => {
-    if (error) {
-      console.error("/create/postcard/:id POST error:", error);
+  User.findById(userId, (findError, user) => {
+    if (findError) {
+      console.log("/create/postcard/ POST findError:", findError);
       res.sendStatus(500);
     } else {
-      res.status(201).send(result);
+      // find trip w/ tripId and push postcard to postcards array
+      user.trips.id(tripId).postcards.push(postcard);
+
+      // save document after push
+      user.save(saveError => {
+        if (saveError) {
+          console.log("/create/postcard/ POST saveError:", saveError);
+          res.sendStatus(500);
+        } else {
+          res.sendStatus(201);
+        }
+      });
     }
   });
 });

@@ -9,6 +9,7 @@ class TripDetails extends Component {
     super(props);
 
     this.handleFAB = this.handleFAB.bind(this);
+    console.log("TripDetails props:", props);
   }
 
   handleFAB() {
@@ -16,6 +17,8 @@ class TripDetails extends Component {
   }
 
   render() {
+    const { details } = this.props;
+
     const postcards = (
       <Card
         header={
@@ -41,10 +44,9 @@ class TripDetails extends Component {
       </Card>
     );
 
-    const title = this.props.details.title;
     return (
       <div className="container">
-        <div className="header">{this.props.details.title}</div>
+        <div className="header">{details.title}</div>
 
         {/* add post fab */}
         <div className="fixed-action-btn">
