@@ -3,8 +3,10 @@ import { updateObject, findById } from "../utils.module.jsx";
 // action types
 import { FETCH_USER, SET_DETAILS } from "./home.action.jsx";
 
-export default (state = { user: {}, details: {} }, action) => {
-  
+export default (
+  state = { user: {}, details: { title: "", postcards: [] } },
+  action
+) => {
   if (action.type === FETCH_USER) {
     return updateObject(state, {
       user: action.payload.data,

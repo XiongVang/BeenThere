@@ -31,7 +31,7 @@ class RegisterContainer extends Component {
         <div className="section card ">
           <div className="section">
             <span className="card-title">Register</span>
-            <p>Please choose a username and password:</p>
+            <p>Please enter info below:</p>
           </div>
           <div className="divider" />
           <RegisterForm onSubmit={register} />

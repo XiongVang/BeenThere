@@ -6,10 +6,11 @@ const Users = require("../models/user.model");
 
 // register
 router.post("/", (req, res, next) => {
-  console.log("post /register route");
+  console.log("post /register route req.body:", req.body);
   const userToSave = {
-    username: req.body.username,
-    password: req.body.password
+    username: req.body.email,
+    password: req.body.password,
+    name: req.body.name
   };
 
   console.log("userToSave", userToSave);
@@ -31,7 +32,7 @@ router.post("/", (req, res, next) => {
 });
 
 // login
-router.put("/", passport.authenticate("local"), (req, res) =>{
+router.put("/", passport.authenticate("local"), (req, res) => {
   res.status(200).send(req.user.username);
 });
 

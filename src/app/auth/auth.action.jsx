@@ -42,6 +42,7 @@ export function login(user) {
  * @param {username: string, password: string} user 
  */
 export function register(user) {
+  console.log("auth.action register() user:", user);
   let request = axios.post("/auth", user);
 
   return {

@@ -7,16 +7,29 @@ const Form = props => {
     <div className="section">
       <form onSubmit={handleSubmit} className="center-align container col s6">
         <div className="input-field col s3">
+          <i className="material-icons prefix">account_box</i>
           <Field
             className="validate"
-            name="username"
+            name="name"
             component="input"
             type="text"
-            id="username"
+            id="name"
           />
-          <label htmlFor="username">Username</label>
+          <label htmlFor="name">Name</label>
         </div>
         <div className="input-field col s3">
+          <i className="material-icons prefix">email</i>
+          <Field
+            className="validate"
+            name="email"
+            component="input"
+            type="email"
+            id="email"
+          />
+          <label htmlFor="email">Email</label>
+        </div>
+        <div className="input-field col s3">
+          <i className="material-icons prefix">lock</i>
           <Field
             className="validate"
             name="password"

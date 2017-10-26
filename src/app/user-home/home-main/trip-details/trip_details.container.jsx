@@ -17,36 +17,36 @@ class TripDetails extends Component {
   }
 
   render() {
-    const { details } = this.props;
-
-    const postcards = (
-      <Card
-        header={
-          <CardTitle
-            reveal
-            image={
-              "https://images.unsplash.com/photo-1494094892896-7f14a4433b7a?w=1950"
-            }
-            waves="light"
-          />
-        }
-        title="Card Title"
-        reveal={
-          <p>
-            Here is some more information about this product that is only
-            revealed once clicked on.
-          </p>
-        }
-      >
-        <p>
-          <a href="#">This is a link</a>
-        </p>
-      </Card>
-    );
+    // const postcards = this.props.details.postcards.map(postcard => {
+    //   return (
+    //     <Card
+    //       header={
+    //         <CardTitle
+    //           reveal
+    //           image={
+    //             "https://images.unsplash.com/photo-1494094892896-7f14a4433b7a?w=1950"
+    //           }
+    //           waves="light"
+    //         />
+    //       }
+    //       title="Card Title"
+    //       reveal={
+    //         <p>
+    //           Here is some more information about this product that is only
+    //           revealed once clicked on.
+    //         </p>
+    //       }
+    //     >
+    //       <p>
+    //         <a href="#">This is a link</a>
+    //       </p>
+    //     </Card>
+    //   );
+    // });
 
     return (
       <div className="container">
-        <div className="header">{details.title}</div>
+        <div className="header">{"<title here>"}</div>
 
         {/* add post fab */}
         <div className="fixed-action-btn">
@@ -57,6 +57,7 @@ class TripDetails extends Component {
 
         {/* post cards */}
         <div className="section row" />
+        {"<postcards here>"}
       </div>
     );
   }

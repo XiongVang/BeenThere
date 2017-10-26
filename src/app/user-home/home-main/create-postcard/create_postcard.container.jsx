@@ -55,7 +55,7 @@ class CreatePostcard extends Component {
     return postcardCreated ? (
       <Redirect to="/home" />
     ) : (
-      <div>
+      <div className="section center-align">
         {/* filestack upload */}
         <ReactFilestack
           apikey="AEdmA9b3IRtDdvGXicdxAz"

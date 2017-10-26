@@ -16,7 +16,7 @@ router.use((req, res, next) => {
 // return username and list of trips
 router.get("/", (req, res) => {
   let query = { _id: req.user._id };
-  let fieldsToReturn = "username trips";
+  let fieldsToReturn = "name username trips";
 
   User.findOne(query, fieldsToReturn, (error, result) => {
     if (error) {

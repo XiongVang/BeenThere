@@ -27,7 +27,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "d3e8b517dbf6fa9ea6e9"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "39541b8cea78df380b83"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -616,7 +616,7 @@
 /* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 	
 	var passport = __webpack_require__(5);
 	var localStrategy = __webpack_require__(6).Strategy;
@@ -643,9 +643,9 @@
 	
 	// Does actual work of logging in
 	// Called by middleware stack
-	passport.use('local', new localStrategy({
+	passport.use("local", new localStrategy({
 	  passReqToCallback: true,
-	  usernameField: 'username'
+	  usernameField: "username"
 	}, function (req, username, password, done) {
 	  // mongoose stuff
 	  User.findOne({ username: username }, function (err, user) {
@@ -655,8 +655,8 @@
 	    // user variable passed to us from Mongoose if it found a match to findOne() above
 	    if (!user) {
 	      // user not found
-	      console.log('userStrategy.js :: no user found');
-	      return done(null, false, { message: 'Incorrect credentials.' });
+	      console.log("userStrategy.js :: no user found");
+	      return done(null, false, { message: "Incorrect credentials." });
 	    } else {
 	      // found user! Now check their given password against the one stored in the DB
 	      // comparePassword() is defined in the schema/model file!
@@ -667,12 +667,12 @@
 	
 	        if (isMatch) {
 	          // all good, populate user object on the session through serializeUser
-	          console.log('userStrategy.js :: all good');
+	          console.log("userStrategy.js :: authenticated -> ", username);
 	          return done(null, user);
 	        } else {
 	          // no good.
-	          console.log('userStrategy.js :: password incorrect');
-	          done(null, false, { message: 'Incorrect credentials.' });
+	          console.log("userStrategy.js :: password incorrect");
+	          done(null, false, { message: "Incorrect credentials." });
 	        }
 	      });
 	    } // end else
@@ -725,6 +725,7 @@
 	
 	/** user collection */
 	const UserSchema = new Schema({
+	  name: { type: String },
 	  username: { type: String, required: true, index: { unique: true } },
 	  password: { type: String, required: true },
 	  trips: [TripSchema]
@@ -884,7 +885,7 @@
 	// return username and list of trips
 	router.get("/", (req, res) => {
 	  let query = { _id: req.user._id };
-	  let fieldsToReturn = "username trips";
+	  let fieldsToReturn = "name username trips";
 	
 	  User.findOne(query, fieldsToReturn, (error, result) => {
 	    if (error) {
@@ -980,10 +981,11 @@
 	
 	// register
 	router.post("/", (req, res, next) => {
-	  console.log("post /register route");
+	  console.log("post /register route req.body:", req.body);
 	  const userToSave = {
-	    username: req.body.username,
-	    password: req.body.password
+	    username: req.body.email,
+	    password: req.body.password,
+	    name: req.body.name
 	  };
 	
 	  console.log("userToSave", userToSave);

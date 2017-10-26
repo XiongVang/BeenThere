@@ -7,6 +7,7 @@ const Form = props => {
     <div className="section">
       <form onSubmit={handleSubmit} className="center-align container col s6">
         <div className="input-field col s3">
+          <i className="material-icons prefix">email</i>
           <Field
             className="validate"
             name="username"
@@ -14,9 +15,10 @@ const Form = props => {
             type="text"
             id="username"
           />
-          <label htmlFor="username">Username</label>
+          <label htmlFor="username">Email</label>
         </div>
         <div className="input-field col s3">
+          <i className="material-icons prefix">lock</i>
           <Field
             className="validate"
             name="password"

@@ -41,6 +41,9 @@ class SideNav extends Component {
             </div>
             <div>
               <span className="white-text name">
+                {user.name ? user.name : "<name>"}
+              </span>
+              <span className="white-text email">
                 {user.username ? user.username : "<username>"}
               </span>
             </div>
