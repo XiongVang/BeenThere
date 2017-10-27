@@ -36,27 +36,31 @@ class TripDetails extends Component {
         </h5>
       ) : (
         // else: render post cards
-        <div key={postcard._id} className="container card">
-          <div className="card-image waves-effect waves-block waves-light">
-            <img className="activator" src={postcard.imageUrl} />
-          </div>
-          <div className="card-content">
-            <span className="card-title activator grey-text text-darken-4">
-              {postcard.title}
-            </span>
-            <div className="row">
-              <span className="col">{postcard.location}</span>
-              <Date className="col">{postcard.date}</Date>
+        details.postcards.map(postcard => {
+          return (
+            <div key={postcard._id} className="container card">
+              <div className="card-image waves-effect waves-block waves-light">
+                <img className="activator" src={postcard.imageUrl} />
+              </div>
+              <div className="card-content">
+                <span className="card-title activator grey-text text-darken-4">
+                  {postcard.title}
+                </span>
+                <div className="row">
+                  <span className="col">{postcard.location}</span>
+                  <Date className="col">{postcard.date}</Date>
+                </div>
+              </div>
+              <div className="card-reveal">
+                <span className="card-title grey-text text-darken-4">
+                  {postcard.title}
+                  <i className="material-icons right">close</i>
+                </span>
+                <p className="flow-text">{postcard.body}</p>
+              </div>
             </div>
-          </div>
-          <div className="card-reveal">
-            <span className="card-title grey-text text-darken-4">
-              {postcard.title}
-              <i className="material-icons right">close</i>
-            </span>
-            <p className="flow-text">{postcard.body}</p>
-          </div>
-        </div>
+          );
+        })
       ); // end postcards
 
     // details view
@@ -68,7 +72,9 @@ class TripDetails extends Component {
         {/* shareable link */}
         <div className="row">
           <div className="col s1">
-            <i className="material-icons">link</i>
+            <a className="col" href={BASE_URL + details._id}>
+              <i className="col material-icons">link</i>
+            </a>
           </div>
           <div className="col s11">{BASE_URL + details._id}</div>
         </div>
@@ -85,7 +91,6 @@ class TripDetails extends Component {
       </div>
     );
   } // end render()
-  
 } // end TripDetails
 
 function mapStateToProps(store) {

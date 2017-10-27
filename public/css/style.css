@@ -44,6 +44,16 @@ html {
   font-size: inherit;
 }
 
+/* support for fixed side nav */
+.user-home-page {
+  padding-left: 200px;
+}
+@media only screen and (max-width: 992px) {
+  .user-home-page {
+    padding-left: 0;
+  }
+}
+
 /* support for sticky footer */
 body {
   display: flex;
@@ -55,12 +65,4 @@ main {
   flex: 1 0 auto;
 }
 
-/* support for fixed side nav */
-.user-home-page {
-  padding-left: 200px;
-}
-@media only screen and (max-width: 992px) {
-  .user-home-page {
-    padding-left: 0;
-  }
-}
+
