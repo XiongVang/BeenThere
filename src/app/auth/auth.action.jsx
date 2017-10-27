@@ -4,6 +4,7 @@ export const AUTHENTICATION = "AUTHENTICATION";
 export const USER_LOGOUT = "LOGOUT_USER";
 export const USER_LOGIN = "LOGIN_USER";
 export const REGISTER_USER = "REGISTER_USER";
+export const FETCH_TRIP = "FETCH_TRIP";
 
 export function authenticate() {
   console.log("***> AUTHENTICATION ACTION<***");
@@ -43,10 +44,23 @@ export function login(user) {
  */
 export function register(user) {
   console.log("auth.action register() user:", user);
-  let request = axios.post("/auth", user);
+  const request = axios.post("/auth", user);
 
   return {
     type: REGISTER_USER,
+    payload: request
+  };
+}
+
+/**
+ * 
+ * @param {tripId: string} tripId 
+ */
+export function fetchTrip(tripId) {
+  const request = axios.get(`/share/${tripId}`);
+
+  return {
+    type: FETCH_TRIP,
     payload: request
   };
 }

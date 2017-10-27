@@ -36,7 +36,7 @@ app.use("/auth", authRouter);
 app.use("/user", userRouter);
 
 // Catch all bucket, must be last!
-app.use("/", indexRouter);
+app.use("*", indexRouter);
 
 // Listen //
 app.listen(port, function() {

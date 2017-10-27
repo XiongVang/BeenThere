@@ -2,14 +2,13 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
-import { Card, CardTitle } from "react-materialize";
+import { Date } from "react-format";
 
+const BASE_URL = "http://localhost:5000/trip/";
 class TripDetails extends Component {
   constructor(props) {
     super(props);
-
     this.handleFAB = this.handleFAB.bind(this);
-    console.log("TripDetails props:", props);
   }
 
   handleFAB() {
@@ -17,36 +16,62 @@ class TripDetails extends Component {
   }
 
   render() {
-    // const postcards = this.props.details.postcards.map(postcard => {
-    //   return (
-    //     <Card
-    //       header={
-    //         <CardTitle
-    //           reveal
-    //           image={
-    //             "https://images.unsplash.com/photo-1494094892896-7f14a4433b7a?w=1950"
-    //           }
-    //           waves="light"
-    //         />
-    //       }
-    //       title="Card Title"
-    //       reveal={
-    //         <p>
-    //           Here is some more information about this product that is only
-    //           revealed once clicked on.
-    //         </p>
-    //       }
-    //     >
-    //       <p>
-    //         <a href="#">This is a link</a>
-    //       </p>
-    //     </Card>
-    //   );
-    // });
+    console.log("TripDetails this.props:", this.props);
+    const { trips, details } = this.props;
 
+    // if: no trip created yet, return text
+    if (trips && trips.length === 0) {
+      return (
+        <h5 className="container section grey-text">
+          Create a trip to start posting.
+        </h5>
+      );
+    }
+
+    let postcards =
+      // if: no postcards created yet, render text
+      details.postcards.length === 0 ? (
+        <h5 className="container section grey-text">
+          Start by creating a postcard.
+        </h5>
+      ) : (
+        // else: render post cards
+        <div key={postcard._id} className="container card">
+          <div className="card-image waves-effect waves-block waves-light">
+            <img className="activator" src={postcard.imageUrl} />
+          </div>
+          <div className="card-content">
+            <span className="card-title activator grey-text text-darken-4">
+              {postcard.title}
+            </span>
+            <div className="row">
+              <span className="col">{postcard.location}</span>
+              <Date className="col">{postcard.date}</Date>
+            </div>
+          </div>
+          <div className="card-reveal">
+            <span className="card-title grey-text text-darken-4">
+              {postcard.title}
+              <i className="material-icons right">close</i>
+            </span>
+            <p className="flow-text">{postcard.body}</p>
+          </div>
+        </div>
+      ); // end postcards
+
+    // details view
     return (
       <div className="container">
-        <div className="header">{"<title here>"}</div>
+        {/* trip title */}
+        <h3 className="header section">{details.title}</h3>
+
+        {/* shareable link */}
+        <div className="row">
+          <div className="col s1">
+            <i className="material-icons">link</i>
+          </div>
+          <div className="col s11">{BASE_URL + details._id}</div>
+        </div>
 
         {/* add post fab */}
         <div className="fixed-action-btn">
@@ -56,15 +81,18 @@ class TripDetails extends Component {
         </div>
 
         {/* post cards */}
-        <div className="section row" />
-        {"<postcards here>"}
+        {postcards}
       </div>
     );
-  }
-}
+  } // end render()
+  
+} // end TripDetails
 
 function mapStateToProps(store) {
-  return { details: store.homeReducer.details };
+  return {
+    trips: store.homeReducer.user.trips,
+    details: store.homeReducer.details
+  };
 }
 
-export default withRouter(connect(mapStateToProps)(TripDetails));
+export default withRouter(connect(mapStateToProps, null)(TripDetails));

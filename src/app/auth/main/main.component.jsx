@@ -2,6 +2,7 @@ import React from "react";
 import { Switch, Route } from "react-router-dom";
 import { connect } from "react-redux";
 
+import TripContainer from "./trip/trip.container.jsx";
 import Landing from "./landing/landing.component.jsx";
 import RegisterContainer from "./register/register.container.jsx";
 import LoginContainer from "./login/login.container.jsx";
@@ -13,9 +14,10 @@ const Main = () => {
     <main>
       <div>
         <Switch>
+          <Route exact path="/trip/:id" component={TripContainer} />
           <Route exact path="/about" component={About} />
-          <Route path="/register" component={RegisterContainer} />
-          <Route path="/login" component={LoginContainer} />
+          <Route exact path="/register" component={RegisterContainer} />
+          <Route exact path="/login" component={LoginContainer} />
           <Route path="/:noMatch" component={NoMatch} />
           <Route path="/" component={Landing} />
         </Switch>

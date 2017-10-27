@@ -27,7 +27,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "2a79a7764a2001ed13e5"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "a6d5bcb2618f403b50ec"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -593,7 +593,7 @@
 	app.use("/user", userRouter);
 	
 	// Catch all bucket, must be last!
-	app.use("/", indexRouter);
+	app.use("*", indexRouter);
 	
 	// Listen //
 	app.listen(port, function () {
@@ -851,6 +851,7 @@
 	const path = __webpack_require__(14);
 	
 	router.get("*", (req, res) => {
+	  console.log("index route hit");
 	  res.sendFile(path.join(__dirname, "/../public/index.html"));
 	});
 	
