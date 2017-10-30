@@ -27,7 +27,7 @@ class HomeContainer extends Component {
       <div className="user-home-page">
         <HomeHeader />
         <HomeMain path={path} />
-        <Footer />
+        {/* <Footer /> */}
       </div>
     ) : (
       <Redirect to="/login" />

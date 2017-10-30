@@ -5,35 +5,35 @@ import { Parallax } from "react-materialize";
 const Landing = props => {
   return (
     <div>
-      <Parallax imageSrc="https://images.unsplash.com/36/xIsiRLngSRWN02yA2BbK_submission-photo-7.jpg?w=800" />
+      <Parallax className="responsive-image" imageSrc="https://images.unsplash.com/36/xIsiRLngSRWN02yA2BbK_submission-photo-7.jpg?w=800" />
       <div className="section white">
         <div className="row container valign-wrapper">
           <i className="material-icons medium col">map</i>
           <div className="col">
             <h3 className="header">Travel</h3>
-            <p className="grey-text text-darken-3 lighten-3">Be adventurous.</p>
+            <h5 className="grey-text text-darken-3 lighten-3">Be adventurous.</h5>
           </div>
         </div>
       </div>
-      <Parallax imageSrc="https://images.unsplash.com/photo-1508166785545-c2dd4c113c66?w=800" />
+      <Parallax className="responsive-image" imageSrc="https://images.unsplash.com/photo-1503646769812-72076d17d410?w=800" />
       <div className="section white">
         <div className="row container valign-wrapper">
           <i className="material-icons medium col">file_upload</i>
           <div className="col">
             <h3 className="header">Post</h3>
-            <p className="grey-text text-darken-3 lighten-3">Create moments.</p>
+            <h5 className="grey-text text-darken-3 lighten-3">Create moments.</h5>
           </div>
         </div>
       </div>
-      <Parallax imageSrc="https://images.unsplash.com/photo-1476304884326-cd2c88572c5f?w=700" />
+      <Parallax className="responsive-image" imageSrc="https://images.unsplash.com/photo-1476304884326-cd2c88572c5f?w=800" />
       <div className="section white">
         <div className="row container valign-wrapper">
           <i className="material-icons medium col">share</i>
           <div className="col">
             <h3 className="header">Share</h3>
-            <p className="grey-text text-darken-3 lighten-3">
+            <h5 className="grey-text text-darken-3 lighten-3">
               Bring the world along.
-            </p>
+            </h5>
           </div>
         </div>
       </div>

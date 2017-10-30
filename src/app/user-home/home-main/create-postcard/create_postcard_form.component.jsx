@@ -49,7 +49,7 @@ const Form = props => {
         <div>
           <a
             onClick={onPick}
-            className="waves-effect waves-light btn yellow accent-4"
+            className="waves-effect waves-light btn yellow darken-4"
           >
             <i className="material-icons left">file_upload</i>
             Upload image
