@@ -16,14 +16,16 @@ Solo Project from Prime Digital Acadamy
 
 High level list of items completed.
 
-- [x] Feature a
-- [x] Feature b
+- [x] Register User
+- [x] Login/Logout
+- [x] Create Trip
+- [x] Add Postcard
 
 ### Next Steps
 
-Features that you would like to add at some point in the future.
-
-- [ ] Feature c
+- [ ] Form Validation
+- [ ] Update
+- [ ] Delete
 
 ## Author
 
